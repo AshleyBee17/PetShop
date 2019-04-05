@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<ArrayOfAnimal xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Animal>
+    <Type>Cat</Type>
+    <Quantity>4</Quantity>
+    <Price>50</Price>
+    <Image>\Images\cat.jpg</Image>
+  </Animal>
+  <Animal>
+    <Type>Dog</Type>
+    <Quantity>17</Quantity>
+    <Price>75</Price>
+    <Image>\Images\Dog.jpg</Image>
+  </Animal>
+  <Animal>
+    <Type>Parakeet</Type>
+    <Quantity>7</Quantity>
+    <Price>15</Price>
+    <Image>\Images\Parakeet.jpg</Image>
+  </Animal>
+  <Animal>
+    <Type>Hamster</Type>
+    <Quantity>700</Quantity>
+    <Price>5</Price>
+    <Image>\Images\Hamster.jpg</Image>
+  </Animal>
+  <Animal />
+  <Animal />
+</ArrayOfAnimal>
