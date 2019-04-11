@@ -35,11 +35,12 @@ namespace PetShop {
             }
         }
 
-        public LoginWindow(ObservableCollection<Account> acctList, Account acct) {
+        public LoginWindow(Account acct) {
             InitializeComponent();
-
-            this.AccountList = acctList;
             this.Account = acct;
+            if(AccountList == null){
+                AccountList = new ObservableCollection<Account>();
+            }
             this.AccountList.Add(Account);
             
             using (FileStream writeStream = new FileStream(path, FileMode.Create, FileAccess.ReadWrite)) {
@@ -68,7 +69,7 @@ namespace PetShop {
         }
 
         private void CreateAccount(object sender, RoutedEventArgs e) {
-            CreateAccount createAccount = new CreateAccount(AccountList);
+            CreateAccount createAccount = new CreateAccount();
             createAccount.Show();
             this.Close();
         }

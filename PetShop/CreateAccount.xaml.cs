@@ -16,16 +16,16 @@ using System.Windows.Shapes;
 namespace PetShop { 
     public partial class CreateAccount : Window {
 
-        ObservableCollection<Account> AccountList;
+        //ObservableCollection<Account> AccountList;
         
         public CreateAccount(){
             InitializeComponent();
         }
-
-        public CreateAccount(ObservableCollection<Account> acctList) {
+        /*
+        public CreateAccount() {
             this.AccountList = acctList;
             InitializeComponent();
-        }
+        }*/
 
         private void Submit(object sender, RoutedEventArgs e) {
             if (ValidateEntries()) {
@@ -64,7 +64,7 @@ namespace PetShop {
         }
 
         private void openLogin(Account a) {
-                LoginWindow loginWindow = new LoginWindow(AccountList, a);
+                LoginWindow loginWindow = new LoginWindow(a);
                 loginWindow.Show();
                 this.Close();
         }

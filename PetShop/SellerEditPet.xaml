@@ -6,7 +6,70 @@
         xmlns:local="clr-namespace:PetShop"
         mc:Ignorable="d"
         Title="SellerEditPet" Height="450" Width="800">
+
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="63*"/>
+            <RowDefinition Height="63*"/>
+            <RowDefinition Height="63*"/>
+            <RowDefinition Height="63*"/>
+            <RowDefinition Height="64*"/>
+            <RowDefinition Height="63"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Click on the fields you want to change and fill out the information accordingly. When finished, press 'Submit' to update the database." 
+                   TextWrapping="Wrap" TextAlignment="Center" Height="45" VerticalAlignment="Center" Grid.ColumnSpan="3" Grid.Column="1" Grid.Row="1"/>
+
+        <DockPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <ComboBox x:Name="PetType" DockPanel.Dock="Top" IsReadOnly="True" IsEditable="True" Text="Dog" Width="275">
+                <ComboBoxItem Content="Dog"/>
+                <ComboBoxItem Content="Cat"/>
+                <ComboBoxItem Content="Fish"/>
+                <ComboBoxItem Content="Hamster"/>
+                <ComboBoxItem Content="Turtle"/>
+            </ComboBox>
+            <Label DockPanel.Dock="Bottom" Content="Pet Type"/>
+        </DockPanel>
+
+        <DockPanel Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBox DockPanel.Dock="Top" x:Name="PetAge" Height="30" Width="270" MaxLength="2"/>
+            <Label DockPanel.Dock="Bottom" Content="Age"/>
+        </DockPanel>
+
+        <DockPanel Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <ComboBox x:Name="PetSize" DockPanel.Dock="Top" IsReadOnly="True" IsEditable="True" Text="Small" Width="275">
+                <ComboBoxItem Content="Small"/>
+                <ComboBoxItem Content="Medium"/>
+                <ComboBoxItem Content="Large"/>
+            </ComboBox>
+            <Label DockPanel.Dock="Bottom" Content="Size"/>
+        </DockPanel>
+
+        <DockPanel Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBox DockPanel.Dock="Top" x:Name="PetQuantity" Height="30" Width="270"/>
+            <Label DockPanel.Dock="Bottom" Content="Quantity"/>
+        </DockPanel>
+
+        <DockPanel Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBox DockPanel.Dock="Top" x:Name="PetPrice" Height="30" Width="268"/>
+            <Label DockPanel.Dock="Bottom" Content="Price"/>
+        </DockPanel>
+
+        <DockPanel Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBox DockPanel.Dock="Top" x:Name="other" Height="30" Width="268" MaxLength="12"/>
+            <Label DockPanel.Dock="Bottom" Content="Location/Zipcode"/>
+        </DockPanel>
+
+        <Button Content="Submit" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="30" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" Click="SavePetToDatabase"/>
+
     </Grid>
+
 </Window>

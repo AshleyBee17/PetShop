@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PetShop"
         mc:Ignorable="d"
         Title="SellerHome" Height="450" Width="800">
-    
+
     <DockPanel>
         <Menu DockPanel.Dock="Top" Background="AliceBlue">
             <Menu.ItemsPanel>
@@ -17,11 +17,14 @@
             <MenuItem Header="Help"/>
             <MenuItem Header="Logout" Click="LogOut"/>
             <MenuItem Header="Add New Pet" Click="AddPetClicked"/>
-            <MenuItem Header="Remove Pet" Click="RemovePetClicked"/>
+            <MenuItem Header="Remove Pet" Command="{Binding RemoveCommand}" CommandParameter="{Binding ElementName=PetDisplayItem, Path=Content}"/>
+            <MenuItem Header="Edit Existing Pet" Command="{Binding EditCommand}" CommandParameter="{Binding ElementName=PetDisplayItem, Path=Content}"/>
             <MenuItem x:Name="WelcomeMessage" HorizontalAlignment="Right">
                 <MenuItem Header="Log Out" Click="LogOut"/>
             </MenuItem>
         </Menu>
+
+        <local:PetDisplay DockPanel.Dock="Top" x:Name="PetDisplayItem"/>
 
         <Grid>
             <Grid.RowDefinitions>
@@ -35,11 +38,16 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="AddPet" Content="Add a New Pet" Grid.Column="1" Grid.Row="1" Width="150" Height="50" Click="AddPetClicked"/>
-            <Button x:Name="RemovePet" Content="Remove a Pet" Grid.Column="2" Grid.Row="1" Width="150" Height="50" Click="RemovePetClicked"/>
+            <Button x:Name="AddPet" Content="Add a Pet" Grid.Column="1" Grid.Row="3" Width="100" Height="30" Click="AddPetClicked"/>
+            <Button x:Name="RemovePet" Grid.Column="2"  Grid.Row="3" Content="Remove"  Width="100" Height="30" Margin="5"
+                    Command="{Binding RemoveCommand}" CommandParameter="{Binding ElementName=PetDisplayItem, Path=Content}"/>
+            <Button x:Name="EditPet" Grid.Column="3"  Grid.Row="3" Content="Edit"  Width="100" Height="30" Margin="5"
+                    Command="{Binding EditCommand}" CommandParameter="{Binding ElementName=PetDisplayItem, Path=Content}"/>
+
         </Grid>
-        
+
     </DockPanel>
 </Window>

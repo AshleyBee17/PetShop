@@ -33,9 +33,16 @@ namespace PetShop {
         }
 
         private void ReadInDataFromXML() {
-            using (FileStream readStream = new FileStream(path,  FileMode.Open, FileAccess.Read)) {
-                AnimalCollection = serializer.Deserialize(readStream) as ObservableCollection<Animal>;
+            /*sing (FileStream readStream = new FileStream(path,  FileMode.Open, FileAccess.Read)) {
+                 AnimalCollection = serializer.Deserialize(readStream) as ObservableCollection<Animal>;
+             }*/
+             // READ FROM DATABASE HERE
+
+            if(AnimalCollection == null){
+                AnimalCollection = new ObservableCollection<Animal>();
             }
+
+            AnimalCollection.Add(new Animal("Dog", "1", "Small", "20", "50", null));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

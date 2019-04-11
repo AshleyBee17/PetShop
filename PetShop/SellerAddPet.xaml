@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:PetShop"
         mc:Ignorable="d"
         Title="SellerAddPet" Height="450" Width="800">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -64,9 +65,10 @@
 
         <DockPanel Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBox DockPanel.Dock="Top" x:Name="other" Height="30" Width="268" MaxLength="12"/>
-            <Label DockPanel.Dock="Bottom" Content="???"/>
+            <Label DockPanel.Dock="Bottom" Content="Location/Zipcode"/>
         </DockPanel>
 
         <Button Content="Submit" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="30" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" Click="AddPetToDatabase"/>
     </Grid>
+
 </Window>
