@@ -17,28 +17,33 @@ namespace PetShop {
 
         Account LoggedInSeller;
 
-        public SellerHome(Account acct) {
+        public SellerHome(Account acct)
+        {
             InitializeComponent();
             this.LoggedInSeller = acct;
             WelcomeMessage.Header = $"Welcome to the Pet Shop, {acct.FirstName}!";
         }
 
-        private void AddPetClicked(object sender, RoutedEventArgs e) {
+        private void AddPetClicked(object sender, RoutedEventArgs e)
+        {
             MessageBox.Show("Add pet window");
             SellerAddPet sellerAddPet = new SellerAddPet();
             sellerAddPet.Show();
             //this.Close();
         }
 
-        private void RemovePetClicked(object sender, RoutedEventArgs e) {
+        private void RemovePetClicked(object sender, RoutedEventArgs e)
+        {
             MessageBox.Show("Delete pet window");
             SellerRemovePet sellerRemovePet = new SellerRemovePet();
             sellerRemovePet.Show();
             //this.Close();
         }
 
-        private void LogOut(object sender, RoutedEventArgs e) {
+        private void LogOut(object sender, RoutedEventArgs e)
+        {
             Application.Current.Shutdown();
         }
+
     }
 }

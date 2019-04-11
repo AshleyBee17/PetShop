@@ -72,6 +72,9 @@
     <Compile Include="SellerAddPet.xaml.cs">
       <DependentUpon>SellerAddPet.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SellerEditPet.xaml.cs">
+      <DependentUpon>SellerEditPet.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SellerHome.xaml.cs">
       <DependentUpon>SellerHome.xaml</DependentUpon>
     </Compile>
@@ -110,6 +113,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SellerAddPet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SellerEditPet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
