@@ -25,7 +25,7 @@ namespace PetShop {
         }
 
         private void SavePetToDatabase(object sender, RoutedEventArgs e) {
-            petType = PetType.Text;
+            //petType = PetType.Text;
             petSize = PetSize.Text;
             petAge = PetAge.Text;
             petQuantity = PetQuantity.Text;
