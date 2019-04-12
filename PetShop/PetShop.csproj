@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Npgsql">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\PostgreSQL\Npgsql\bin\netstandard2.0\Npgsql.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -69,6 +72,7 @@
       <DependentUpon>PlaceOrder.xaml</DependentUpon>
     </Compile>
     <Compile Include="PlaceOrderVM.cs" />
+    <Compile Include="PostgreSQL.cs" />
     <Compile Include="SellerAddPet.xaml.cs">
       <DependentUpon>SellerAddPet.xaml</DependentUpon>
     </Compile>
