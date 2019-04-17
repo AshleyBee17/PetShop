@@ -20,7 +20,6 @@ namespace PetShop {
         public string PurchasedAmount { get; set; }
 
         
-
         //public Account Owner { get; set; }
 
         public Animal() {}

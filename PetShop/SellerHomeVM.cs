@@ -35,9 +35,12 @@ namespace PetShop
             if(selectedAnimal == null) {
                 MessageBox.Show("Please select an animal before removing it", "Invalid Selection");
             } else {
-                MessageBox.Show("Animal removed from the database");
-                CollectionViewSource.GetDefaultView(lb.ItemsSource).Refresh();
-                //ADD DB FUNCTIONALITY
+                MessageBox.Show("Removing from the database...");
+                PostgreSQL.deletePet(selectedAnimal.PetID);
+
+                SellerHome sh = new SellerHome(LoggedInSeller);
+                closeWindows();
+                sh.Show();                
             }
         }
 

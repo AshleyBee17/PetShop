@@ -190,6 +190,23 @@ namespace PetShop {
             npgCommand.Parameters.AddWithValue("l", a.Zipcode);
 
             npgCommand.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        public static void deletePet(int petID)
+        {
+            string id = petID.ToString();
+
+            conn = new NpgsqlConnection(cs);
+            conn.Open();
+
+            npgCommand = new NpgsqlCommand();
+            npgCommand.Connection = conn;
+
+            npgCommand.CommandText = "DELETE FROM public.pets WHERE \"PetID\"=\'" + id + "\';";
+
+            npgCommand.ExecuteNonQuery();
+            conn.Close();
         }
     }
 }
