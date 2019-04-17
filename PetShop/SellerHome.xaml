@@ -31,7 +31,6 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
-                <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -41,11 +40,11 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="AddPet" Content="Add a Pet" Grid.Column="1" Grid.Row="3" Width="100" Height="30" Click="AddPetClicked"/>
-            <Button x:Name="RemovePet" Grid.Column="2"  Grid.Row="3" Content="Remove"  Width="100" Height="30" Margin="5"
+            <Button x:Name="AddPet" Content="Add a Pet" Grid.Column="1" Grid.Row="1" Width="100" Height="30" Click="AddPetClicked"/>
+            <Button x:Name="RemovePet" Grid.Column="2"  Grid.Row="1" Content="Remove"  Width="100" Height="30" 
                     Command="{Binding RemoveCommand}" CommandParameter="{Binding ElementName=PetDisplayItem, Path=Content}"/>
-            <Button x:Name="EditPet" Grid.Column="3"  Grid.Row="3" Content="Edit"  Width="100" Height="30" Margin="5"
-                    Command="{Binding EditCommand}" CommandParameter="{Binding ElementName=PetDisplayItem, Path=Content}"/>
+            <Button x:Name="EditPet" Grid.Column="3"  Grid.Row="1" Content="Edit"  Width="100" Height="30"
+                    Command="{Binding EditCommand}" CommandParameter="{Binding ElementName=PetDisplayItem, Path=Content}" Click="EditPet_Click"/>
 
         </Grid>
 

@@ -26,7 +26,7 @@ namespace PetShop {
 
         private void AddPetClicked(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Add pet window");
+          
             SellerAddPet sellerAddPet = new SellerAddPet();
             sellerAddPet.Show();
             //this.Close();
@@ -34,9 +34,15 @@ namespace PetShop {
 
         private void RemovePetClicked(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Delete pet window");
             SellerRemovePet sellerRemovePet = new SellerRemovePet();
             sellerRemovePet.Show();
+            //this.Close();
+        }
+
+        private void EditPet_Click(object sender, RoutedEventArgs e)
+        {
+            SellerEditPet sellerEditPet = new SellerEditPet();
+            sellerEditPet.Show();
             //this.Close();
         }
 
@@ -44,6 +50,5 @@ namespace PetShop {
         {
             Application.Current.Shutdown();
         }
-
     }
 }
