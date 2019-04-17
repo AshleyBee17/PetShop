@@ -19,21 +19,48 @@ namespace PetShop {
         string petPrice;
         string petQuantity;
         string petAge;
+        string petZip;
     
         public SellerEditPet() {
             InitializeComponent();
         }
 
         private void SavePetToDatabase(object sender, RoutedEventArgs e) {
-            petType = PetType.Text;
-            petSize = PetSize.Text;
-            petAge = PetAge.Text;
-            petQuantity = PetQuantity.Text;
-            petPrice = PetPrice.Text;
+            petType = PetTypeEntry.Text;
+            petSize = PetSizeEntry.Text;
+            petAge = PetAgeEntry.Text;
+            petQuantity = PetQuantityEntry.Text;
+            petPrice = PetPriceEntry.Text;
+            petZip = PetZipEntry.Text;
 
-            Animal a = new Animal(petType, petAge, petSize, petQuantity, petPrice, null);
-
-            // Save to database here?
+            if (CheckEntries()) {
+                MessageBox.Show("Updating database...");
+                
+                // Update database here
+            }
         }
+
+        private bool CheckEntries() {
+            bool ageValid, quanValid, zipValid, priceValid;
+
+            ageValid = string.IsNullOrWhiteSpace(PetAgeEntry.Text) ? false : true;
+            PetAgeEntry.BorderBrush = ageValid ? PetAgeEntry.BorderBrush = Brushes.Gray : PetAgeEntry.BorderBrush = Brushes.Red;
+
+            quanValid = string.IsNullOrWhiteSpace(PetQuantityEntry.Text) ? false : true;
+            PetQuantityEntry.BorderBrush = quanValid ? PetQuantityEntry.BorderBrush = Brushes.Gray : PetQuantityEntry.BorderBrush = Brushes.Red;
+
+            priceValid = string.IsNullOrWhiteSpace(PetPriceEntry.Text) ? false : true;
+            PetPriceEntry.BorderBrush = priceValid ? PetPriceEntry.BorderBrush = Brushes.Gray : PetPriceEntry.BorderBrush = Brushes.Red;
+
+            zipValid = string.IsNullOrWhiteSpace(PetZipEntry.Text) ? false : ValidateZip(PetZipEntry.Text);
+            PetZipEntry.BorderBrush = zipValid ? PetZipEntry.BorderBrush = Brushes.Gray : PetZipEntry.BorderBrush = Brushes.Red;
+
+            return ageValid && quanValid && zipValid && priceValid;
+        }
+
+        private bool ValidateZip(string str){
+            return (str.Where(a => char.IsDigit(a)).Count() == str.Length && str.Length == 5);
+        }
+
     }
 }
