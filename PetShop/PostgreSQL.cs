@@ -49,7 +49,7 @@ namespace PetShop {
             "Password=14ae486acc344b86f85908647d9c2fd3d4b3dbaaea06f5f4d1e2c38840be9ee6" +
             "Database=d77bi6lo5qhe6r";
 
-        public static ObservableCollection<Animal> readPetsFromDB() {
+        public static ObservableCollection<Animal> getAllPets() {
             conn = new NpgsqlConnection(cs);
             conn.Open();
             sql = "SELECT * FROM pets;"; 
@@ -85,6 +85,57 @@ namespace PetShop {
             conn = new NpgsqlConnection(cs);
             conn.Open();
             sql = "SELECT * FROM pets WHERE \"Age\"=\'"+ petAge +"\';";
+            npgCommand = new NpgsqlCommand(sql, conn);
+
+            NpgsqlDataAdapter npgsqlDataAdapter = new NpgsqlDataAdapter(npgCommand);
+            DataTable dataTable = new DataTable();
+
+            npgsqlDataAdapter.Fill(dataTable);
+
+            conn.Close();
+            return returnAnimals(dataTable);
+        }
+
+        public static ObservableCollection<Animal> searchByZip(string petZip)
+        {
+
+            conn = new NpgsqlConnection(cs);
+            conn.Open();
+            sql = "SELECT * FROM pets WHERE \"Location\"=\'" + petZip + "\';";
+            npgCommand = new NpgsqlCommand(sql, conn);
+
+            NpgsqlDataAdapter npgsqlDataAdapter = new NpgsqlDataAdapter(npgCommand);
+            DataTable dataTable = new DataTable();
+
+            npgsqlDataAdapter.Fill(dataTable);
+
+            conn.Close();
+            return returnAnimals(dataTable);
+        }
+
+        public static ObservableCollection<Animal> searchByPrice(string petPrice)
+        {
+
+            conn = new NpgsqlConnection(cs);
+            conn.Open();
+            sql = "SELECT * FROM pets WHERE \"Price\"=\'" + petPrice + "\';";
+            npgCommand = new NpgsqlCommand(sql, conn);
+
+            NpgsqlDataAdapter npgsqlDataAdapter = new NpgsqlDataAdapter(npgCommand);
+            DataTable dataTable = new DataTable();
+
+            npgsqlDataAdapter.Fill(dataTable);
+
+            conn.Close();
+            return returnAnimals(dataTable);
+        }
+
+        public static ObservableCollection<Animal> searchByType(string petType)
+        {
+
+            conn = new NpgsqlConnection(cs);
+            conn.Open();
+            sql = "SELECT * FROM pets WHERE \"Type\"=\'" + petType + "\';";
             npgCommand = new NpgsqlCommand(sql, conn);
 
             NpgsqlDataAdapter npgsqlDataAdapter = new NpgsqlDataAdapter(npgCommand);

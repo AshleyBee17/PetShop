@@ -16,7 +16,6 @@ namespace PetShop {
     public class PetDisplayVM : INotifyPropertyChanged {
 
         public static ObservableCollection<Animal> AnimalCollection { get; set; }
-        XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Animal>));
         //string path = "animals.xml";
 
         private Animal _selectedAnimal;
@@ -35,8 +34,7 @@ namespace PetShop {
         private void ReadInData() {
 
             // READ FROM DATABASE HERE
-            AnimalCollection = PostgreSQL.readPetsFromDB();
-            PostgreSQL.searchByAge("1");
+            AnimalCollection = PostgreSQL.getAllPets();
 
             if(AnimalCollection == null){
                 AnimalCollection = new ObservableCollection<Animal>();
