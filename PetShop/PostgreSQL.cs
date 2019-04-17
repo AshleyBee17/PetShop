@@ -114,5 +114,34 @@ namespace PetShop {
             conn.Close();
             return animalList;
         }
+
+        public static ObservableCollection<Animal> searchByAge(int petAge) {
+
+            conn = new NpgsqlConnection(cs);
+            conn.Open();
+            sql = "SELECT * FROM pets WHERE \"Age\"=" + petAge + ";";
+            npgCommand = new NpgsqlCommand(sql, conn);
+            ObservableCollection<Animal> animalList = new ObservableCollection<Animal>();
+
+            NpgsqlDataAdapter npgsqlDataAdapter = new NpgsqlDataAdapter(npgCommand);
+            DataTable dataTable = new DataTable();
+
+            npgsqlDataAdapter.Fill(dataTable);
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                Animal a = new Animal();
+                a.Size = row.Field<string>("Size");
+                a.Type = row.Field<string>("Type");
+                a.Age = row.Field<string>("Age");
+                a.Quantity = row.Field<string>("Quantity");
+                a.Price = row.Field<string>("Price");
+                a.Zipcode = row.Field<string>("Location");
+
+                animalList.Add(a);
+            }
+            conn.Close();
+            return animalList;
+        }
     }
 }

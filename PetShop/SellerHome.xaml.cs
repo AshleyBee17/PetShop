@@ -23,32 +23,12 @@ namespace PetShop {
             InitializeComponent();
             this.LoggedInSeller = acct;
             WelcomeMessage.Header = $"Welcome to the Pet Shop, {acct.FirstName}!";
+            PetDisplayVM.AnimalCollection = PostgreSQL.getOwnersPets(1);
             SellerHomeVM sellerHomeVM = new SellerHomeVM(LoggedInSeller);
             DataContext = sellerHomeVM;
           
         }
-        /*
-        private void AddPetClicked(object sender, RoutedEventArgs e)
-        {
-            SellerAddPet sellerAddPet = new SellerAddPet();
-            sellerAddPet.Show();
-            //this.Close();
-        }
-
-        private void RemovePetClicked(object sender, RoutedEventArgs e)
-        {
-            SellerRemovePet sellerRemovePet = new SellerRemovePet();
-            sellerRemovePet.Show();
-            //this.Close();
-        }
-
-        private void EditPet_Click(object sender, RoutedEventArgs e)
-        {
-            SellerEditPet sellerEditPet = new SellerEditPet();
-            sellerEditPet.Show();
-            //this.Close();
-        }
-        */
+       
         private void LogOut(object sender, RoutedEventArgs e) {
             Application.Current.Shutdown();
         }

@@ -36,7 +36,6 @@ namespace PetShop {
 
             // READ FROM DATABASE HERE
             AnimalCollection = PostgreSQL.readPetsFromDB();
-            PostgreSQL.getOwnersPets(1);
 
             if(AnimalCollection == null){
                 AnimalCollection = new ObservableCollection<Animal>();

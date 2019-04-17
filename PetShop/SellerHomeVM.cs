@@ -17,7 +17,7 @@ namespace PetShop
         public ListBox lb;
 
         public SellerHomeVM(Account acct) {
-            this.LoggedInUser = acct;  
+            this.LoggedInUser = acct;
         }
 
         private void AddPet(object o) {
