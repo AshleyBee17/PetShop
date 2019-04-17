@@ -28,7 +28,7 @@ namespace PetShop {
         public LoginWindow() {
             InitializeComponent();
             
-            //PostgreSQL.x();
+            PostgreSQL.readPetsFromDB();
 
             try {
                 ReadAccountsFromMemory();
