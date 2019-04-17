@@ -174,10 +174,11 @@ namespace PetShop {
 
             npgCommand = new NpgsqlCommand();
             npgCommand.Connection = conn; 
-            npgCommand.CommandText = "INSERT INTO public.pets( \"PetID\", \"OwnerID\", \"Size\", \"Type\", \"Age\", \"Quantity\", \"Price\", \"Location\") " +
-                "VALUES (@pid, @oid, @s, @t, @a, @q, @p, @l)";
 
-            //npgCommand.Parameters.AddWithValue("pid", 3);
+            npgCommand.CommandText = "INSERT INTO public.pets(\"OwnerID\", \"Size\", \"Type\", \"Age\", \"Quantity\", \"Price\", \"Location\") " +
+                "VALUES (@oid, @s, @t, @a, @q, @p, @l)";
+
+
             npgCommand.Parameters.AddWithValue("oid", 1);
             npgCommand.Parameters.AddWithValue("s", a.Size);
             npgCommand.Parameters.AddWithValue("t", a.Type);
