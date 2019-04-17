@@ -9,6 +9,7 @@ using System.Xml.Serialization;
 namespace PetShop {
     public class Account {
 
+        public int id { get; set; }
         public string FirstName { get; set;}
         public string LastName { get; set; }
         public string Username { get; set; }

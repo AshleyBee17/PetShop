@@ -154,6 +154,8 @@ namespace PetShop {
             foreach (DataRow row in d.Rows)
             {
                 Animal a = new Animal();
+                a.PetID = row.Field<int>("PetID");
+                a.OwnerID = row.Field<int>("OwnerID");
                 a.Size = row.Field<string>("Size");
                 a.Type = row.Field<string>("Type");
                 a.Age = row.Field<string>("Age");

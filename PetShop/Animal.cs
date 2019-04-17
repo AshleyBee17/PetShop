@@ -9,6 +9,8 @@ namespace PetShop {
 
     public class Animal {
 
+        public int PetID { get; set; }
+        public int OwnerID { get; set; }
         public string Type { get; set; }
         public string Quantity { get; set; }
         public string Price { get; set; }
@@ -17,26 +19,32 @@ namespace PetShop {
         public string Zipcode { get; set; }
         public string PurchasedAmount { get; set; }
 
-        public Account Owner { get; set; }
+        
+
+        //public Account Owner { get; set; }
 
         public Animal() {}
 
-        public Animal(string type, string quantity, 
-            string price, Account owner){
-            Type = type;
-            Quantity = quantity;
-            Price = price;
-            Owner = owner;
-        }
-
-        public Animal(string type, string age, string size, string quantity, string price, string zip, Account owner) { 
+        public Animal(int oid, string type, string age, string size, string quantity, string price, string zip)
+        {
+            OwnerID = oid;
             Type = type;
             Age = age;
             Size = size;
             Quantity = quantity;
             Price = price;
             Zipcode = zip;
-            Owner = owner;
+        }
+
+        public Animal(int pid, int oid, string type, string age, string size, string quantity, string price, string zip) {
+            PetID = pid;
+            OwnerID = oid;
+            Type = type;
+            Age = age;
+            Size = size;
+            Quantity = quantity;
+            Price = price;
+            Zipcode = zip;
         }
 
     }
