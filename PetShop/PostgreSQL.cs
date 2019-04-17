@@ -49,86 +49,58 @@ namespace PetShop {
             "Password=14ae486acc344b86f85908647d9c2fd3d4b3dbaaea06f5f4d1e2c38840be9ee6" +
             "Database=d77bi6lo5qhe6r";
 
-        public static ObservableCollection<Animal> readPetsFromDB()
-        {
-            
+        public static ObservableCollection<Animal> readPetsFromDB() {
             conn = new NpgsqlConnection(cs);
             conn.Open();
             sql = "SELECT * FROM pets;"; 
             npgCommand = new NpgsqlCommand(sql, conn);
-            ObservableCollection<Animal> animalList = new ObservableCollection<Animal>();
 
             NpgsqlDataAdapter npgsqlDataAdapter = new NpgsqlDataAdapter(npgCommand);
             DataTable dataTable = new DataTable();
 
             npgsqlDataAdapter.Fill(dataTable);
 
-            foreach (DataRow row in dataTable.Rows) { 
-                Animal a = new Animal();
-                a.Size = row.Field<string>("Size");
-                a.Type = row.Field<string>("Type");
-                a.Age = row.Field<string>("Age");
-                a.Quantity = row.Field<string>("Quantity");
-                a.Price = row.Field<string>("Price");
-                a.Zipcode = row.Field<string>("Location");
-
-                animalList.Add(a);
-                /*
-                for (int i = 0; i < dataTable.Columns.Count; i++)
-                {
-                    Console.Write("{0} \n", row[i].ToString());
-                }
-                */
-            }
-
             conn.Close();
-            return animalList;
+            return returnAnimals(dataTable);
         }
 
         public static ObservableCollection<Animal> getOwnersPets(int ownerID) {
-            //ownerID = 1;
 
             conn = new NpgsqlConnection(cs);
             conn.Open();
             sql = "SELECT * FROM pets WHERE \"OwnerID\"=" + ownerID +";";
             npgCommand = new NpgsqlCommand(sql, conn);
-            ObservableCollection<Animal> animalList = new ObservableCollection<Animal>();
 
             NpgsqlDataAdapter npgsqlDataAdapter = new NpgsqlDataAdapter(npgCommand);
             DataTable dataTable = new DataTable();
 
             npgsqlDataAdapter.Fill(dataTable);
 
-            foreach (DataRow row in dataTable.Rows)
-            {
-                Animal a = new Animal();
-                a.Size = row.Field<string>("Size");
-                a.Type = row.Field<string>("Type");
-                a.Age = row.Field<string>("Age");
-                a.Quantity = row.Field<string>("Quantity");
-                a.Price = row.Field<string>("Price");
-                a.Zipcode = row.Field<string>("Location");
-
-                animalList.Add(a);
-            }
             conn.Close();
-            return animalList;
+            return returnAnimals(dataTable);
         }
 
-        public static ObservableCollection<Animal> searchByAge(int petAge) {
+        public static ObservableCollection<Animal> searchByAge(string petAge) {
 
             conn = new NpgsqlConnection(cs);
             conn.Open();
-            sql = "SELECT * FROM pets WHERE \"Age\"=" + petAge + ";";
+            sql = "SELECT * FROM pets WHERE \"Age\"=\'"+ petAge +"\';";
             npgCommand = new NpgsqlCommand(sql, conn);
-            ObservableCollection<Animal> animalList = new ObservableCollection<Animal>();
 
             NpgsqlDataAdapter npgsqlDataAdapter = new NpgsqlDataAdapter(npgCommand);
             DataTable dataTable = new DataTable();
 
             npgsqlDataAdapter.Fill(dataTable);
 
-            foreach (DataRow row in dataTable.Rows)
+            conn.Close();
+            return returnAnimals(dataTable);
+        }
+
+        private static ObservableCollection<Animal> returnAnimals(DataTable d)
+        {
+            ObservableCollection<Animal> animalList = new ObservableCollection<Animal>();
+
+            foreach (DataRow row in d.Rows)
             {
                 Animal a = new Animal();
                 a.Size = row.Field<string>("Size");
