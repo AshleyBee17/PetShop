@@ -33,10 +33,9 @@ namespace PetShop {
         }
 
         private void ReadInDataFromXML() {
-            /*sing (FileStream readStream = new FileStream(path,  FileMode.Open, FileAccess.Read)) {
-                 AnimalCollection = serializer.Deserialize(readStream) as ObservableCollection<Animal>;
-             }*/
-             // READ FROM DATABASE HERE
+
+            // READ FROM DATABASE HERE
+            // AnimalCollection = PostgreSQL.readPetsFromDB();
 
             if(AnimalCollection == null){
                 AnimalCollection = new ObservableCollection<Animal>();
