@@ -42,8 +42,7 @@ namespace PetShop {
             }    
         }
 
-        private bool CheckEntries()
-        {
+        private bool CheckEntries() {
 
             bool ageValid, quanValid, zipValid, priceValid;
 

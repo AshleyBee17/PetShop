@@ -152,7 +152,7 @@ namespace PetShop {
                 CollectionViewSource.GetDefaultView(Parent.Cart).Refresh();
                 CollectionViewSource.GetDefaultView(Parent.lb.ItemsSource).Refresh();
             } catch (Exception e) {
-                MessageBox.Show("Error, please reload the program.");
+                MessageBox.Show("Error, please reload the program. " + e);
             }
             SaveDataToXML();
         }

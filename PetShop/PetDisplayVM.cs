@@ -17,7 +17,7 @@ namespace PetShop {
 
         public static ObservableCollection<Animal> AnimalCollection { get; set; }
         XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Animal>));
-        string path = "animals.xml";
+        //string path = "animals.xml";
 
         private Animal _selectedAnimal;
         public Animal SelectedAnimal {

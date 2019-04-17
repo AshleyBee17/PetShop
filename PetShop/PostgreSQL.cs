@@ -127,8 +127,8 @@ namespace PetShop {
             }
             catch (Exception msg)
             {
-                
-                //MessageBox.Show(msg.ToString());
+
+                Debug.WriteLine("Error Logged Here: " + msg + " END LOGGING");
                 throw;
             }
         }

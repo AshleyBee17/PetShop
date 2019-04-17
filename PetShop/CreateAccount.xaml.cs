@@ -79,7 +79,7 @@ namespace PetShop {
         }
 
         bool ValidateEntries () {
-            bool validateFirstName, validateLastName, validateUsername, validatePassword, validateZip, validatePhone, validateCard;
+            bool validateFirstName, validateLastName, validateUsername, validatePassword, validatePhone;
             bool validateAcctType;
 
             validateFirstName = string.IsNullOrWhiteSpace(FirstNameEntry.Text) ? false : ValidateLetters(FirstNameEntry.Text);
