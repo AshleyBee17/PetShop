@@ -38,6 +38,7 @@ namespace PetShop {
             {
                 MessageBox.Show("Adding to the database...");
                 Animal a = new Animal(petType, petAge, petSize, petQuantity, petPrice, petZip, null);
+                PostgreSQL.addPet(a);
                 // Add to database here
             }    
         }

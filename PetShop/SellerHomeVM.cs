@@ -22,6 +22,7 @@ namespace PetShop
 
         private void AddPet(object o) {
             SellerAddPet sellerAddPet = new SellerAddPet();
+            closeWindows();
             sellerAddPet.Show();
             //this.Close();
         }
@@ -53,6 +54,11 @@ namespace PetShop
                 sellerEditPet.Show();
                 //this.Close();
             }
+        }
+
+        private void closeWindows()
+        {
+            
         }
 
         public ICommand AddCommand
