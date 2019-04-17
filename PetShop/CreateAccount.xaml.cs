@@ -51,7 +51,7 @@ namespace PetShop {
                     Account.Type = Seller.Content.ToString();
                     ZipCodePanel.Visibility = Visibility.Visible;
                     if (string.IsNullOrWhiteSpace(ZipEntry.Text)) {
-                        MessageBox.Show("Please enter your zip code to finish creating your account");
+                        MessageBox.Show("One more thing! - Please enter your zip code to finish creating your account");
                     }
                     if (validateZip()) {
                         Account.ZipCode = ZipEntry.Text;

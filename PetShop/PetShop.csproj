@@ -102,6 +102,7 @@
     <Compile Include="SellerHome.xaml.cs">
       <DependentUpon>SellerHome.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SellerHomeVM.cs" />
     <Compile Include="SellerRemovePet.xaml.cs">
       <DependentUpon>SellerRemovePet.xaml</DependentUpon>
     </Compile>

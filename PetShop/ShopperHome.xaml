@@ -47,7 +47,7 @@
                     <ComboBoxItem Content="Age"/>
                     <ComboBoxItem Content="Type"/>
                     <ComboBoxItem Content="Price"/>
-                    <ComboBoxItem Content="Location"/>
+                    <ComboBoxItem Content="Zipcode"/>
                 </ComboBox>
                 <Button Name="SearchBy" Content="Search" DockPanel.Dock="Right" VerticalAlignment="Center" Width="100" Height="25" Margin="5"/>
             </DockPanel>

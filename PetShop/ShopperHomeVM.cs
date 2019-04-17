@@ -112,7 +112,7 @@ namespace PetShop {
 
         public ShopperHomeVM(Account acct) {
             this.LoggedInUser = acct;
-            ReadInDataFromXML();
+            //ReadInDataFromXML();
             if(LoggedInUser.CartContent != null) {
                 foreach(object o in LoggedInUser.CartContent) {
                     Animal an = o as Animal;

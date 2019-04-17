@@ -21,8 +21,14 @@ namespace PetShop {
         string petAge;
         string petZip;
     
-        public SellerEditPet() {
+        public SellerEditPet(Animal a) {
             InitializeComponent();
+            PetTypeEntry.Text = a.Type;
+            PetSizeEntry.Text = a.Size;
+            PetAgeEntry.Text = a.Age;
+            PetQuantityEntry.Text = a.Quantity;
+            PetPriceEntry.Text = a.Price;
+            PetZipEntry.Text = a.Zipcode;
         }
 
         private void SavePetToDatabase(object sender, RoutedEventArgs e) {

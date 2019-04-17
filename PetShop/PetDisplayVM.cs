@@ -42,7 +42,7 @@ namespace PetShop {
                 AnimalCollection = new ObservableCollection<Animal>();
             }
 
-            AnimalCollection.Add(new Animal("Dog", "1", "Small", "20", "50", null));
+            AnimalCollection.Add(new Animal("Dog", "1", "Small", "20", "50","33647", null));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

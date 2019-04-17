@@ -37,7 +37,7 @@ namespace PetShop {
             if (CheckEntries())
             {
                 MessageBox.Show("Adding to the database...");
-                Animal a = new Animal(petType, petAge, petSize, petQuantity, petPrice, null);
+                Animal a = new Animal(petType, petAge, petSize, petQuantity, petPrice, petZip, null);
                 // Add to database here
             }    
         }
