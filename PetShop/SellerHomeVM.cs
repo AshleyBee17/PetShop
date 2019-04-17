@@ -13,15 +13,15 @@ namespace PetShop
 {
     class SellerHomeVM : INotifyPropertyChanged {
 
-        Account LoggedInUser;
+        Account LoggedInSeller;
         public ListBox lb;
 
         public SellerHomeVM(Account acct) {
-            this.LoggedInUser = acct;
+            this.LoggedInSeller = acct;
         }
 
         private void AddPet(object o) {
-            SellerAddPet sellerAddPet = new SellerAddPet();
+            SellerAddPet sellerAddPet = new SellerAddPet(LoggedInSeller);
             closeWindows();
             sellerAddPet.Show();
             //this.Close();
@@ -58,7 +58,10 @@ namespace PetShop
 
         private void closeWindows()
         {
-            
+            foreach (Window item in Application.Current.Windows)
+            {
+                if (item.DataContext == this) item.Close();
+            }
         }
 
         public ICommand AddCommand
