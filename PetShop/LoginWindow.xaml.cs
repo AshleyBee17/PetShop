@@ -18,7 +18,7 @@ using System.Xml.Serialization;
 namespace PetShop {
     public partial class LoginWindow : Window {
 
-        ObservableCollection<Account> AccountList { get; set; } 
+        ObservableCollection<Account> AccountList { get; set; }
         Account Account = new Account();
         Account AccountToLogin = new Account();
 
@@ -38,9 +38,11 @@ namespace PetShop {
         public LoginWindow(ObservableCollection<Account> acctList, Account acct) {
             InitializeComponent();
 
-            this.AccountList = acctList;
             this.Account = acct;
-            this.AccountList.Add(Account);
+            acctList.Add(Account);
+            this.AccountList = acctList;
+            
+            //this.AccountList.Add(Account);
             
             using (FileStream writeStream = new FileStream(path, FileMode.Create, FileAccess.ReadWrite)) {
                 serializer.Serialize(writeStream, AccountList);

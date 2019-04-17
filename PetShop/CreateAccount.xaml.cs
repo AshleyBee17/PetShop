@@ -58,7 +58,6 @@ namespace PetShop {
                         openLogin(Account);
                     }
                 }
-
                 
             }
         }
