@@ -25,6 +25,7 @@ namespace PetShop {
             WelcomeMessage.Header = $"Welcome to the Pet Shop, {acct.FirstName}!";
             SellerHomeVM sellerHomeVM = new SellerHomeVM(LoggedInSeller);
             DataContext = sellerHomeVM;
+          
         }
         /*
         private void AddPetClicked(object sender, RoutedEventArgs e)

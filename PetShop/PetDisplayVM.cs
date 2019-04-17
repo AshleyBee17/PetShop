@@ -29,19 +29,20 @@ namespace PetShop {
         }
         
         public PetDisplayVM() {
-            ReadInDataFromXML();
+            ReadInData();
         }
 
-        private void ReadInDataFromXML() {
+        private void ReadInData() {
 
             // READ FROM DATABASE HERE
-            // AnimalCollection = PostgreSQL.readPetsFromDB();
+            AnimalCollection = PostgreSQL.readPetsFromDB();
+            PostgreSQL.getOwnersPets(1);
 
             if(AnimalCollection == null){
                 AnimalCollection = new ObservableCollection<Animal>();
             }
 
-            AnimalCollection.Add(new Animal("Dog", "1", "Small", "20", "50","33647", null));
+           //AnimalCollection.Add(new Animal("Dog", "1", "Small", "20", "50","33647", null));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
