@@ -33,14 +33,11 @@ namespace PetShop {
 
         private void ReadInData() {
 
-            // READ FROM DATABASE HERE
             AnimalCollection = PostgreSQL.getAllPets();
 
             if(AnimalCollection == null){
                 AnimalCollection = new ObservableCollection<Animal>();
             }
-
-           //AnimalCollection.Add(new Animal("Dog", "1", "Small", "20", "50","33647", null));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

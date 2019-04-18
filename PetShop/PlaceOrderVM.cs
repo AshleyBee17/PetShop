@@ -61,11 +61,11 @@ namespace PetShop {
                         animal.Quantity = (int.Parse(animal.Quantity) - int.Parse(a.PurchasedAmount)).ToString();
                     }
                 }
-                /*
+                
                 foreach (Account acc in AccountList) {
-                   if (acc.Username == LoggedInShopper.Username) { // CHANGE THIS TO ACCOUNT ID
+                   if (acc.id == LoggedInShopper.id) { 
                        foreach (Animal o in acc.CartContent.ToList()) {
-                           if(o.Size == a.Size) { // CHANGE THIS TO ANIMAL ID
+                           if(o.PetID == a.PetID) { 
                                acc.PreviousPurchases.Add(o);                        
                                acc.CartContent.Remove(o);
                            }
@@ -75,7 +75,7 @@ namespace PetShop {
                        //Parent.TotalItem = 0;
                        //Parent.TotalCost = 0;
                    }
-                }    */  
+                }    
             }
             SaveDataToXML();
         }
@@ -117,31 +117,7 @@ namespace PetShop {
                 }
             }
         }
-        /*
-        private void EmailReceipt(object obj) {
-            // This has the user send themselves the email
-            SmtpClient client = new SmtpClient("smpt.gmail.com");
-            client.Port = 587;
-            client.EnableSsl = true;
-            client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            client.UseDefaultCredentials = false;
-            client.Timeout = 10000;
-            client.Credentials = new System.Net.NetworkCredential(LoggedInShopper.Email, LoggedInShopper.Password);
 
-            MailMessage mail = new MailMessage();
-            mail.From = new MailAddress(LoggedInShopper.Email);
-            mail.To.Add(LoggedInShopper.Email);
-            mail.Subject = "Your Pet Shop Receipt";
-            mail.Body = ReceiptText;
-            mail.BodyEncoding = Encoding.UTF8;
-
-            try {
-                client.Send(mail);
-            } catch (SmtpException e) {
-                MessageBox.Show("Email does not have proper credentials to be sent","Email Error");
-            }
-        }
-        */
         public ICommand SaveReceiptCommand {
             get {
                 if (_saveFileEvent == null) _saveFileEvent = new DelegateCommand(SaveReceipt);
@@ -149,15 +125,7 @@ namespace PetShop {
             }
         }
         DelegateCommand _saveFileEvent;
-        /*
-        public ICommand EmailReceiptCommand {
-            get {
-                if (_emailReceiptEvent == null) _emailReceiptEvent = new DelegateCommand(EmailReceipt);
-                return _emailReceiptEvent;
-            }
-        }
-        DelegateCommand _emailReceiptEvent;
-        */
+
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
     }
 }

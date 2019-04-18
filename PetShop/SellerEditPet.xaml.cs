@@ -22,8 +22,6 @@ namespace PetShop {
         string petZip;
 
         Account LoggedInSeller;
-        int petID;
-
 
         public SellerEditPet(Account acct, Animal a) {
             InitializeComponent();
@@ -54,7 +52,6 @@ namespace PetShop {
                 SellerHome sh = new SellerHome(LoggedInSeller);
                 sh.Show();
                 this.Close();
-                // Update database here
             }
         }
 

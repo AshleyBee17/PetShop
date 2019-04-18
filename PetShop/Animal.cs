@@ -19,8 +19,6 @@ namespace PetShop {
         public string Zipcode { get; set; }
         public string PurchasedAmount { get; set; }
 
-        //public Account Owner { get; set; }
-
         public Animal() {}
 
         public Animal(int oid, string type, string age, string size, string quantity, string price, string zip)
