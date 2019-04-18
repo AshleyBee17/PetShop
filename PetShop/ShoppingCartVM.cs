@@ -56,11 +56,11 @@ namespace PetShop {
 
                             foreach(Account acc in AccountList) {
 
-                                if (acc.Username == LoggedInUser.Username) { // CHANGE THIS TO ACCOUNT ID
+                                if (acc.id == LoggedInUser.id) { // CHANGE THIS TO ACCOUNT ID
 
                                     foreach (Animal o in acc.CartContent.ToList()) {
 
-                                        if(o.Size == animal.Size) { // CHANGE THIS TO ANIMAL ID
+                                        if(o.PetID == animal.PetID) { // CHANGE THIS TO ANIMAL ID
                                             // Update cart total and item total in user account
                                             acc.CartTotal = sumTotal.ToString();
                                             acc.CartItems = sumItem.ToString();
@@ -90,9 +90,9 @@ namespace PetShop {
                             a.Quantity = animal.Quantity;
                         }
                         foreach(Account acc in AccountList) {
-                            if (acc.Username == LoggedInUser.Username) { // CHANGE THIS TO ACOUNT ID
+                            if (acc.id == LoggedInUser.id) { // CHANGE THIS TO ACOUNT ID
                                 foreach (Animal o in acc.CartContent.ToList()) {
-                                    if(o.Size == an.Size) { // CHANGE THIS TO ANIMAL ID
+                                    if(o.PetID == an.PetID) { // CHANGE THIS TO ANIMAL ID
                                         acc.CartContent.Remove(o);
                                         acc.CartTotal = sumTotal.ToString();
                                         acc.CartItems = sumItem.ToString();
@@ -137,9 +137,9 @@ namespace PetShop {
 
                 // Remove the item from the user's account
                 foreach(Account a in AccountList) {
-                    if (a.Username == LoggedInUser.Username) { // CHANGE THIS TO ACCOUNT ID
+                    if (a.id == LoggedInUser.id) { // CHANGE THIS TO ACCOUNT ID
                         foreach (Animal o in a.CartContent.ToList()) {
-                            if(o.Size == selectedAnimal.Size) { // CHANGE THIS TO ANIMAL ID
+                            if(o.PetID == selectedAnimal.PetID) { // CHANGE THIS TO ANIMAL ID
                                 a.CartContent.Remove(o);
                                 a.CartTotal = (int.Parse(a.CartTotal) - (int.Parse(selectedAnimal.PurchasedAmount) * int.Parse(selectedAnimal.Price))).ToString();
                                 a.CartItems = (int.Parse(a.CartItems) - int.Parse(selectedAnimal.PurchasedAmount)).ToString();
