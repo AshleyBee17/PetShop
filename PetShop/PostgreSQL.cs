@@ -208,5 +208,29 @@ namespace PetShop {
             npgCommand.ExecuteNonQuery();
             conn.Close();
         }
+
+        public static void editPet(Animal a)
+        {
+            string id = a.PetID.ToString();
+
+            conn = new NpgsqlConnection(cs);
+            conn.Open();
+
+            npgCommand = new NpgsqlCommand();
+            npgCommand.Connection = conn;
+
+            npgCommand.CommandText = "UPDATE public.pets SET " +
+                "\"Size\"=\'"+ a.Size +"\'," +
+                "\"Type\"=\'" + a.Type + "\'," +
+                "\"Age\"=\'" + a.Age + "\'," +
+                "\"Quantity\"=\'" + a.Quantity + "\'," +
+                "\"Price\"=\'" + a.Price + "\'," +
+                "\"Location\"=\'" + a.Zipcode +
+                "\' WHERE \"PetID\"=\'" + id + "\';";
+
+            npgCommand.ExecuteNonQuery();
+            conn.Close();
+        }
+
     }
 }

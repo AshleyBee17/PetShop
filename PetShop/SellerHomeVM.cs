@@ -24,7 +24,6 @@ namespace PetShop
             SellerAddPet sellerAddPet = new SellerAddPet(LoggedInSeller);
             closeWindows();
             sellerAddPet.Show();
-            //this.Close();
         }
 
         private void DeletePet(object o) {
@@ -53,9 +52,9 @@ namespace PetShop
             {
                 MessageBox.Show("Please select an animal before editing it", "Invalid Selection");
             } else {
-                SellerEditPet sellerEditPet = new SellerEditPet(selectedAnimal);
+                SellerEditPet sellerEditPet = new SellerEditPet(LoggedInSeller, selectedAnimal);
+                closeWindows();
                 sellerEditPet.Show();
-                //this.Close();
             }
         }
 
