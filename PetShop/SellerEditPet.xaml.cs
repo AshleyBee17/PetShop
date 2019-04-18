@@ -27,7 +27,7 @@ namespace PetShop {
             InitializeComponent();
 
             this.LoggedInSeller = acct;
-            this.petID = a.PetID;
+            //this.petID = a.PetID;
 
             PetTypeEntry.Text = a.Type;
             PetSizeEntry.Text = a.Size;

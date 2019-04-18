@@ -23,6 +23,9 @@ namespace PetShop {
             InitializeComponent();
             this.LoggedInSeller = acct;
             WelcomeMessage.Header = $"Welcome to the Pet Shop, {acct.FirstName}!";
+            //PetDisplayVM.AnimalCollection = PostgreSQL.getOwnersPets(0);
+            //PetDisplayVM vm = new PetDisplayVM();
+           // vm.AnimalCollection = PostgreSQL.getOwnersPets(0);
             SellerHomeVM sellerHomeVM = new SellerHomeVM(LoggedInSeller);
             DataContext = sellerHomeVM;
           

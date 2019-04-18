@@ -18,6 +18,7 @@ namespace PetShop
 
         public SellerHomeVM(Account acct) {
             this.LoggedInSeller = acct;
+           //PetDisplayVM.AnimalCollection = PostgreSQL.getOwnersPets(0);
         }
 
         private void AddPet(object o) {
