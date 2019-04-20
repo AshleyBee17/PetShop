@@ -181,7 +181,7 @@ namespace PetShop {
                 "VALUES (@oid, @s, @t, @a, @q, @p, @l)";
 
 
-            npgCommand.Parameters.AddWithValue("oid", 1);
+            npgCommand.Parameters.AddWithValue("oid", 0);
             npgCommand.Parameters.AddWithValue("s", a.Size);
             npgCommand.Parameters.AddWithValue("t", a.Type);
             npgCommand.Parameters.AddWithValue("a", a.Age);

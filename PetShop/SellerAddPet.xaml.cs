@@ -27,6 +27,7 @@ namespace PetShop {
         public SellerAddPet(Account acct) { 
             InitializeComponent();
             this.LoggedInSeller = acct;
+            PetZipEntry.Text = acct.ZipCode.ToString();//int.Parse(acct.ZipCode);
         }
 
         private void AddPetToDatabase(object sender, RoutedEventArgs e) {
