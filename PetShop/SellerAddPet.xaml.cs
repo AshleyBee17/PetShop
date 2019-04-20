@@ -27,7 +27,7 @@ namespace PetShop {
         public SellerAddPet(Account acct) { 
             InitializeComponent();
             this.LoggedInSeller = acct;
-            PetZipEntry.Text = acct.ZipCode.ToString();//int.Parse(acct.ZipCode);
+            PetZipEntry.Text = acct.ZipCode.ToString();
         }
 
         private void AddPetToDatabase(object sender, RoutedEventArgs e) {
@@ -38,8 +38,7 @@ namespace PetShop {
             petPrice =  PetPriceEntry.Text;
             petZip = PetZipEntry.Text;
 
-            if (CheckEntries())
-            {
+            if (CheckEntries()) {
                 MessageBox.Show("Adding to the database...");
                 Animal a = new Animal(LoggedInSeller.id, petType, petAge, petSize, petQuantity, petPrice, petZip);
                 PostgreSQL.addPet(a);

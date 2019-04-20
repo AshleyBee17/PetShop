@@ -14,8 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace PetShop {
-    public partial class SellerHome : Window, INotifyPropertyChanged
-    {
+    public partial class SellerHome : Window, INotifyPropertyChanged {
 
         Account LoggedInSeller;
 
@@ -23,12 +22,8 @@ namespace PetShop {
             InitializeComponent();
             this.LoggedInSeller = acct;
             WelcomeMessage.Header = $"Welcome to the Pet Shop, {acct.FirstName}!";
-            //PetDisplayVM.AnimalCollection = PostgreSQL.getOwnersPets(0);
-            //PetDisplayVM vm = new PetDisplayVM();
-           // vm.AnimalCollection = PostgreSQL.getOwnersPets(0);
             SellerHomeVM sellerHomeVM = new SellerHomeVM(LoggedInSeller);
-            DataContext = sellerHomeVM;
-          
+            DataContext = sellerHomeVM;  
         }
        
         private void LogOut(object sender, RoutedEventArgs e) {

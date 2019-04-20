@@ -29,7 +29,7 @@ namespace PetShop {
         public PetDisplayVM() {
             if (LoginWindow.AccountToLogin.ZipCode != null) {
                 ReadInDataFromSeller(0);
-                //ReadInDataFromSeller(LoginWindow.AccountToLogin.id);
+                //ReadInDataFromSeller(LoginWindow.AccountToLogin.id); 
             } else ReadInAllData();
         }
 

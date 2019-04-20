@@ -16,38 +16,12 @@ namespace PetShop {
         private static NpgsqlConnection conn;
         private static NpgsqlCommand npgCommand;
         private static string sql = null;
-        static string host = "ec2-54-225-129-101.compute-1.amazonaws.com";
-        static string server2 = "Server=127.0.0.1";
-        static string id = "sqpdoquiqznjdl";
-        static string password = "14ae486acc344b86f85908647d9c2fd3d4b3dbaaea06f5f4d1e2c38840be9ee6";
-        static string db = "d77bi6lo5qhe6r";
-        static string port = "5432";
-        public static SqlConnection dbConnection;
 
         static string cs = "Server=127.0.0.1;" +
-                "Port=5432;" +
-                "Username=postgres;" +
-                "Password=14ae486acc344b86f85908647d9c2fd3d4b3dbaaea06f5f4d1e2c38840be9ee6;" +
-                "Database=postgres;";
-
-        static string connString = "Server=127.0.0.1;" +
-                "Port=5432;" +
-                "Username=sqpdoquiqznjdl;" +
-                "Password=14ae486acc344b86f85908647d9c2fd3d4b3dbaaea06f5f4d1e2c38840be9ee6;" +
-                "Database=d77bi6lo5qhe6r;";
-
-        static string connString2 = "psql " +
-            "host=ec2-54-225-129-101.compute-1.amazonaws.com " +
-            "port=5432 --username=sqpdoquiqznjdl " +
-            "password=14ae486acc344b86f85908647d9c2fd3d4b3dbaaea06f5f4d1e2c38840be9ee6 " +
-            "dbname=d77bi6lo5qhe6r";
-
-        static string connString3 = //"psql " +
-           // "Server=127.0.0.1" +
-            "Port=5432" +
-            "Username=sqpdoquiqznjdl" +
-            "Password=14ae486acc344b86f85908647d9c2fd3d4b3dbaaea06f5f4d1e2c38840be9ee6" +
-            "Database=d77bi6lo5qhe6r";
+                            "Port=5432;" +
+                            "Username=postgres;" +
+                            "Password=14ae486acc344b86f85908647d9c2fd3d4b3dbaaea06f5f4d1e2c38840be9ee6;" +
+                            "Database=postgres;";
 
         public static ObservableCollection<Animal> getAllPets() {
             conn = new NpgsqlConnection(cs);

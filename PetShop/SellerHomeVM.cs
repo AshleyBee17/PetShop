@@ -18,7 +18,6 @@ namespace PetShop
 
         public SellerHomeVM(Account acct) {
             this.LoggedInSeller = acct;
-           //PetDisplayVM.AnimalCollection = PostgreSQL.getOwnersPets(0);
         }
 
         private void AddPet(object o) {
@@ -49,8 +48,7 @@ namespace PetShop
             lb = o as ListBox;
             Animal selectedAnimal = lb.SelectedItem as Animal;
 
-            if (selectedAnimal == null)
-            {
+            if (selectedAnimal == null) {
                 MessageBox.Show("Please select an animal before editing it", "Invalid Selection");
             } else {
                 SellerEditPet sellerEditPet = new SellerEditPet(LoggedInSeller, selectedAnimal);
@@ -59,10 +57,8 @@ namespace PetShop
             }
         }
 
-        private void closeWindows()
-        {
-            foreach (Window item in Application.Current.Windows)
-            {
+        private void closeWindows() {
+            foreach (Window item in Application.Current.Windows) {
                 if (item.DataContext == this) item.Close();
             }
         }
