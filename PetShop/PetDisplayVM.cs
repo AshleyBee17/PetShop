@@ -16,7 +16,6 @@ namespace PetShop {
     public class PetDisplayVM : INotifyPropertyChanged {
 
         public static ObservableCollection<Animal> AnimalCollection { get; set; }
-        //string path = "animals.xml";
 
         private Animal _selectedAnimal;
         public Animal SelectedAnimal {
@@ -28,10 +27,22 @@ namespace PetShop {
         }
         
         public PetDisplayVM() {
-            ReadInData();
+            if (LoginWindow.AccountToLogin.ZipCode != null) {
+                ReadInDataFromSeller(0);
+                //ReadInDataFromSeller(LoginWindow.AccountToLogin.id);
+            } else ReadInAllData();
         }
 
-        private void ReadInData() {
+        private void ReadInDataFromSeller(int id) {
+
+            AnimalCollection = PostgreSQL.getOwnersPets(id);
+
+            if (AnimalCollection == null){
+                AnimalCollection = new ObservableCollection<Animal>();
+            }
+        }
+
+        private void ReadInAllData() {
 
             AnimalCollection = PostgreSQL.getAllPets();
 

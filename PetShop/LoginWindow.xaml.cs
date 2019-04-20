@@ -20,7 +20,7 @@ namespace PetShop {
 
         ObservableCollection<Account> AccountList { get; set; } 
         Account Account = new Account();
-        Account AccountToLogin = new Account();
+        public static Account AccountToLogin = new Account();
 
         XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Account>));
         string path = "userAccounts.xml";
