@@ -43,7 +43,7 @@ namespace PetShop {
                 AccountList = new ObservableCollection<Account>();
             }
             this.AccountList.Add(Account);
-            PostgreSQL.addAccount(Account);
+            //PostgreSQL.addAccount(Account);
             
             //using (FileStream writeStream = new FileStream(path, FileMode.Create, FileAccess.ReadWrite)) {
             //    serializer.Serialize(writeStream, AccountList);

@@ -25,15 +25,14 @@ namespace PetShop {
         public Account() {}
 
         public Account(string firstName, string lastName, string username, string password, 
-            string telephone, string cart, string type,
-            string cartItems, string cartTotal) {
+            string telephone, string type, string cartItems, string cartTotal) {
+
             FirstName = firstName;
             LastName = lastName;
             Username = username;
             Password = password;
             Telephone = telephone;
             Type = type;
-
             CartItems = cartItems;
             CartTotal = cartTotal;
             

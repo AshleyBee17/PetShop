@@ -49,6 +49,7 @@ namespace PetShop {
                 MessageBox.Show("Updating database...");
                 Animal a = new Animal(LoggedInSeller.id, petType, petAge, petSize, petQuantity, petPrice, petZip);
                 PostgreSQL.editPet(a);
+                PostgreSQL.editSeller(LoggedInSeller, a);
                 SellerHome sh = new SellerHome(LoggedInSeller);
                 sh.Show();
                 this.Close();
