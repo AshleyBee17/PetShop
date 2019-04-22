@@ -282,11 +282,11 @@ namespace PetShop {
             npgCommand = new NpgsqlCommand();
             npgCommand.Connection = conn;
 
-            npgCommand.CommandText = "INSERT INTO public.sellers(\"SellerID\", \"PetID\") " +
-                "VALUES (@i, @p)";
+            npgCommand.CommandText = "INSERT INTO public.sellers(\"PetID\", \"Zipcode\") " +
+                "VALUES (@p, @z)";
        
-                npgCommand.Parameters.AddWithValue("i", a.id);
                 npgCommand.Parameters.AddWithValue("p", e.PetID);
+                npgCommand.Parameters.AddWithValue("z", e.Zipcode);
                 npgCommand.ExecuteNonQuery();
                 conn.Close();
           
@@ -361,8 +361,8 @@ namespace PetShop {
 
             npgCommand.CommandText = "UPDATE public.sellers SET " +
                 "\"SellerID\"=\'" + a.id + "\'," +
-                "\"PetID\"=\'" + e.PetID + "\'," +
-                "\' WHERE \"SellerID\"=\'" + id + "\';";
+                "\"PetID\"=\'" + e.PetID + "\'" +
+                " WHERE \"SellerID\"=\'" + id + "\';";
 
             npgCommand.ExecuteNonQuery();
             conn.Close();
