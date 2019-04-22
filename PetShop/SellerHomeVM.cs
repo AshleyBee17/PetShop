@@ -35,6 +35,7 @@ namespace PetShop
                 MessageBox.Show("Please select an animal before removing it", "Invalid Selection");
             } else {
                 MessageBox.Show("Removing from the database...");
+                PostgreSQL.deleteSeller(selectedAnimal.PetID);
                 PostgreSQL.deletePet(selectedAnimal.PetID);
 
                 SellerHome sh = new SellerHome(LoggedInSeller);

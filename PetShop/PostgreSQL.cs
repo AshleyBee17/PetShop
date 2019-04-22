@@ -154,7 +154,7 @@ namespace PetShop {
                 "VALUES (@oid, @s, @t, @a, @q, @p, @l)";
 
 
-            npgCommand.Parameters.AddWithValue("oid", 0);
+            npgCommand.Parameters.AddWithValue("oid", a.OwnerID);
             npgCommand.Parameters.AddWithValue("s", a.Size);
             npgCommand.Parameters.AddWithValue("t", a.Type);
             npgCommand.Parameters.AddWithValue("a", a.Age);
@@ -284,12 +284,12 @@ namespace PetShop {
 
             npgCommand.CommandText = "INSERT INTO public.sellers(\"SellerID\", \"PetID\") " +
                 "VALUES (@i, @p)";
-
-            npgCommand.Parameters.AddWithValue("i", a.id);
-            npgCommand.Parameters.AddWithValue("p", e.PetID);
-
-            npgCommand.ExecuteNonQuery();
-            conn.Close();
+       
+                npgCommand.Parameters.AddWithValue("i", a.id);
+                npgCommand.Parameters.AddWithValue("p", e.PetID);
+                npgCommand.ExecuteNonQuery();
+                conn.Close();
+          
         }
 
         public static void addShopper(Account a, Animal e)
@@ -303,13 +303,13 @@ namespace PetShop {
             npgCommand.CommandText = "INSERT INTO public.shoppers(\"ShopperID\", \"PetID\", \"CartItems\", \"CartTotal\") " +
                 "VALUES (@i, @p, @ci, @ct)";
 
-            npgCommand.Parameters.AddWithValue("i", a.id);
-            npgCommand.Parameters.AddWithValue("p", e.PetID);
-            npgCommand.Parameters.AddWithValue("ci", a.CartItems);
-            npgCommand.Parameters.AddWithValue("ct", a.CartTotal);
+                npgCommand.Parameters.AddWithValue("i", a.id);
+                npgCommand.Parameters.AddWithValue("p", e.PetID);
+                npgCommand.Parameters.AddWithValue("ci", a.CartItems);
+                npgCommand.Parameters.AddWithValue("ct", a.CartTotal);
+                npgCommand.ExecuteNonQuery();
+                conn.Close();
 
-            npgCommand.ExecuteNonQuery();
-            conn.Close();
         }
 
         public static void editShopper(Account a, Animal e)
@@ -333,6 +333,22 @@ namespace PetShop {
             conn.Close();
         }
 
+        public static void deleteShopper(int pid)
+        {
+            string id = pid.ToString();
+
+            conn = new NpgsqlConnection(cs);
+            conn.Open();
+
+            npgCommand = new NpgsqlCommand();
+            npgCommand.Connection = conn;
+
+            npgCommand.CommandText = "DELETE FROM public.shoppers WHERE \"PetID\"=\'" + id + "\';";
+
+            npgCommand.ExecuteNonQuery();
+            conn.Close();
+        }
+
         public static void editSeller(Account a, Animal e)
         {
             string id = a.id.ToString();
@@ -347,6 +363,22 @@ namespace PetShop {
                 "\"SellerID\"=\'" + a.id + "\'," +
                 "\"PetID\"=\'" + e.PetID + "\'," +
                 "\' WHERE \"SellerID\"=\'" + id + "\';";
+
+            npgCommand.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        public static void deleteSeller(int pid)
+        {
+            string id = pid.ToString();
+
+            conn = new NpgsqlConnection(cs);
+            conn.Open();
+
+            npgCommand = new NpgsqlCommand();
+            npgCommand.Connection = conn;
+
+            npgCommand.CommandText = "DELETE FROM public.sellers WHERE \"PetID\"=\'" + id + "\';";
 
             npgCommand.ExecuteNonQuery();
             conn.Close();
