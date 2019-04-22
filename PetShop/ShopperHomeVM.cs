@@ -77,7 +77,7 @@ namespace PetShop {
             }
         }
 
-        private string _searchText;
+        private  string _searchText;
         public string SearchText
         {
             get { return _searchText; }
@@ -88,8 +88,8 @@ namespace PetShop {
             }
         }
 
-        private string _searchType;
-        public string SearchType
+        private  string _searchType;
+        public  string SearchType
         {
             get { return _searchType; }
             set
@@ -146,10 +146,11 @@ namespace PetShop {
                 }
             }
         }
+        ObservableCollection<Animal> AnimalCollection;
 
         private void AddToCartClicked(object obj) {
 
-            ObservableCollection<Animal> AnimalCollection;
+            //ObservableCollection<Animal> AnimalCollection;
             ObservableCollection<Account> AccountList;
             AnimalCollection = PostgreSQL.getAllPets();
             AccountList = PostgreSQL.getAllAccounts();
@@ -267,7 +268,7 @@ namespace PetShop {
                 if(SearchType == "Age")
                 {
 
-                   var agesearch = PostgreSQL.searchByAge(SearchText);
+                   
                     // search for the search text in the db using one of the 
                     // postgresql.cs functions written
                     
@@ -277,6 +278,7 @@ namespace PetShop {
                     // set the results to AnimalCollection or something
 
                     closeWindows();
+                    AnimalCollection = PostgreSQL.searchByAge(SearchText);
                     sh.Show();
 
                 } else if (SearchType == "Type")

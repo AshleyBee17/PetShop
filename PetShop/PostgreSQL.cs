@@ -283,9 +283,10 @@ namespace PetShop {
             npgCommand.Connection = conn;
 
             //npgCommand.CommandText = "INSERT INTO public.sellers(\"PetID\", \"Zipcode\") VALUES (@p, @z)";
-            npgCommand.CommandText = "INSERT INTO public.sellers(\"PetID\", \"Zipcode\") VALUES ( @p, @z)";
+            npgCommand.CommandText = "INSERT INTO public.sellers(\"SellerID\", \"PetID\", \"Zipcode\") VALUES ( @s, @p, (SELECT \"PetID\" from pets WHERE \"PetID\"='"+ e.PetID +"') @z)";
 
-            npgCommand.Parameters.AddWithValue("p", e.PetID);
+            npgCommand.Parameters.AddWithValue("s", a.id);
+           // npgCommand.Parameters.AddWithValue("p", e.PetID);
             npgCommand.Parameters.AddWithValue("z", e.Zipcode);
             npgCommand.ExecuteNonQuery();
             conn.Close();

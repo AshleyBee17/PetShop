@@ -28,9 +28,8 @@ namespace PetShop {
         
         public PetDisplayVM() {
             if (LoginWindow.AccountToLogin.Type == "Seller") {
-                ReadInDataFromSeller(0);
-                //ReadInDataFromSeller(LoginWindow.AccountToLogin.id); 
-            } else ReadInAllData();
+                ReadInDataFromSeller(LoginWindow.AccountToLogin.id); 
+            }  else ReadInAllData();
         }
 
         private void ReadInDataFromSeller(int id) {
