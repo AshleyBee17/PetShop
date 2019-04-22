@@ -267,7 +267,7 @@ namespace PetShop {
                 if(SearchType == "Age")
                 {
 
-                    PostgreSQL.searchByAge(SearchText);
+                   var agesearch = PostgreSQL.searchByAge(SearchText);
                     // search for the search text in the db using one of the 
                     // postgresql.cs functions written
                     
@@ -282,7 +282,7 @@ namespace PetShop {
                 } else if (SearchType == "Type")
                 {
                     //hello jelina and ashley
-                    PostgreSQL.searchByType(SearchText);
+                   var typeSearch = PostgreSQL.searchByType(SearchText);
                     // search for the search text in the db using one of the 
                     // postgresql.cs functions written
 
@@ -296,7 +296,7 @@ namespace PetShop {
 
                 } else if (SearchType == "Price")
                 {
-                    PostgreSQL.searchByPrice(SearchText);
+                    var priceSearch = PostgreSQL.searchByPrice(SearchText);
                     // search for the search text in the db using one of the 
                     // postgresql.cs functions written
 
@@ -311,7 +311,7 @@ namespace PetShop {
                 }
                 else if (SearchType == "Zipcode")
                 {
-                    PostgreSQL.searchByZip(SearchText);
+                   var zipcodeSearch = PostgreSQL.searchByZip(SearchText);
                     // search for the search text in the db using one of the 
                     // postgresql.cs functions written
 
