@@ -282,13 +282,13 @@ namespace PetShop {
             npgCommand = new NpgsqlCommand();
             npgCommand.Connection = conn;
 
-            npgCommand.CommandText = "INSERT INTO public.sellers(\"PetID\", \"Zipcode\") " +
-                "VALUES (@p, @z)";
-       
-                npgCommand.Parameters.AddWithValue("p", e.PetID);
-                npgCommand.Parameters.AddWithValue("z", e.Zipcode);
-                npgCommand.ExecuteNonQuery();
-                conn.Close();
+            //npgCommand.CommandText = "INSERT INTO public.sellers(\"PetID\", \"Zipcode\") VALUES (@p, @z)";
+            npgCommand.CommandText = "INSERT INTO public.sellers(\"PetID\", \"Zipcode\") VALUES ( @p, @z)";
+
+            npgCommand.Parameters.AddWithValue("p", e.PetID);
+            npgCommand.Parameters.AddWithValue("z", e.Zipcode);
+            npgCommand.ExecuteNonQuery();
+            conn.Close();
           
         }
 
