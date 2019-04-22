@@ -77,6 +77,28 @@ namespace PetShop {
             }
         }
 
+        private string _searchText;
+        public string SearchText
+        {
+            get { return _searchText; }
+            set
+            {
+                _searchText = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("SearchText"));
+            }
+        }
+
+        private string _searchType;
+        public string SearchType
+        {
+            get { return _searchType; }
+            set
+            {
+                _searchType = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("SearchType"));
+            }
+        }
+
         private double _totalCost = 0;
         public double TotalCost {
             get { return _totalCost; }
@@ -113,6 +135,7 @@ namespace PetShop {
         public ShopperHomeVM(Account acct) {
             this.LoggedInUser = acct;
             //ReadInDataFromXML();
+            SearchType = "Age";
             if(LoggedInUser.CartContent != null) {
                 foreach(object o in LoggedInUser.CartContent) {
                     Animal an = o as Animal;
@@ -153,7 +176,7 @@ namespace PetShop {
                             CollectionViewSource.GetDefaultView(lb.ItemsSource).Refresh();
 
                             foreach (Account a in AccountList) {
-                                if (a.Username == LoggedInUser.Username) { // CHANGE THIS TO ACCOUNT ID
+                                if (a.id == LoggedInUser.id) { // CHANGE THIS TO ACCOUNT ID
                                     a.CartContent.Add(selectedAnimal);
                                     a.CartTotal = TotalCost.ToString(); 
                                     a.CartItems = TotalItem.ToString(); 
@@ -180,7 +203,7 @@ namespace PetShop {
                             CollectionViewSource.GetDefaultView(lb.ItemsSource).Refresh();
 
                             foreach (Account a in AccountList) {
-                                if (a.Username == LoggedInUser.Username) { // CHANGE THIS TO ACCOUNT ID
+                                if (a.id == LoggedInUser.id) { // CHANGE THIS TO ACCOUNT ID
                                     a.CartContent.Add(selectedAnimal);
                                     a.CartTotal = TotalCost.ToString(); 
                                     a.CartItems = TotalItem.ToString(); 
@@ -227,6 +250,38 @@ namespace PetShop {
             po.Show();
         }
 
+        private void SearchPets(object o) {
+            if(SearchText == null){
+                MessageBox.Show("Please enter a search critera");
+            } else {
+                SearchText = SearchText.ToLower();
+                if(SearchType == "Age")
+                {
+                    // search for the search text in the db using one of the 
+                    // postgresql.cs functions written
+
+                    
+                    ShopperHome sh = new ShopperHome(LoggedInUser);
+
+                    // set the results to AnimalCollection or something
+
+                    closeWindows();
+                    sh.Show();
+
+                } else if (SearchType == "Type")
+                {
+
+                } // Continue...
+
+            }
+        }
+
+        private void closeWindows() {
+            foreach (Window item in Application.Current.Windows) {
+                if (item.DataContext == this) item.Close();
+            }
+        }
+
         public ICommand OpenCartCommand {
             get
             {
@@ -251,6 +306,16 @@ namespace PetShop {
             }
         }
         DelegateCommand _placeOrderEvent;
+
+        public ICommand SearchCommand
+        {
+            get
+            {
+                if (_searchEvent == null) _searchEvent = new DelegateCommand(SearchPets);
+                return _searchEvent;
+            }
+        }
+        DelegateCommand _searchEvent;
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
     }

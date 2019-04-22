@@ -12,7 +12,7 @@ using System.Data.SqlClient;
 namespace PetShop {
     class PostgreSQL {
 
-        // defining things to connect to the database
+        // defining to connect to the database
         private static NpgsqlConnection conn;
         private static NpgsqlCommand npgCommand;
         private static string sql = null;
@@ -22,6 +22,27 @@ namespace PetShop {
                             "Username=postgres;" +
                             "Password=14ae486acc344b86f85908647d9c2fd3d4b3dbaaea06f5f4d1e2c38840be9ee6;" +
                             "Database=postgres;";
+
+        private static ObservableCollection<Animal> returnAnimals(DataTable d) {
+            ObservableCollection<Animal> animalList = new ObservableCollection<Animal>();
+
+            foreach (DataRow row in d.Rows)
+            {
+                Animal a = new Animal();
+                a.PetID = row.Field<int>("PetID");
+                a.OwnerID = row.Field<int>("OwnerID");
+                a.Size = row.Field<string>("Size");
+                a.Type = row.Field<string>("Type");
+                a.Age = row.Field<string>("Age");
+                a.Quantity = row.Field<string>("Quantity");
+                a.Price = row.Field<string>("Price");
+                a.Zipcode = row.Field<string>("Location");
+
+                animalList.Add(a);
+            }
+            conn.Close();
+            return animalList;
+        }
 
         public static ObservableCollection<Animal> getAllPets() {
             conn = new NpgsqlConnection(cs);
@@ -121,28 +142,6 @@ namespace PetShop {
             return returnAnimals(dataTable);
         }
 
-        private static ObservableCollection<Animal> returnAnimals(DataTable d)
-        {
-            ObservableCollection<Animal> animalList = new ObservableCollection<Animal>();
-
-            foreach (DataRow row in d.Rows)
-            {
-                Animal a = new Animal();
-                a.PetID = row.Field<int>("PetID");
-                a.OwnerID = row.Field<int>("OwnerID");
-                a.Size = row.Field<string>("Size");
-                a.Type = row.Field<string>("Type");
-                a.Age = row.Field<string>("Age");
-                a.Quantity = row.Field<string>("Quantity");
-                a.Price = row.Field<string>("Price");
-                a.Zipcode = row.Field<string>("Location");
-
-                animalList.Add(a);
-            }
-            conn.Close();
-            return animalList;
-        }
-
         public static void addPet(Animal a)
         {
             conn = new NpgsqlConnection(cs);
@@ -167,9 +166,8 @@ namespace PetShop {
             conn.Close();
         }
 
-        public static void deletePet(int petID)
-        {
-            string id = petID.ToString();
+        public static void deletePet(int pid) { 
+            string id = pid.ToString();
 
             conn = new NpgsqlConnection(cs);
             conn.Open();
@@ -440,3 +438,4 @@ namespace PetShop {
 
     }
 }
+  

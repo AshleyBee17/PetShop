@@ -27,7 +27,7 @@ namespace PetShop {
         public ShoppingCartVM(ShopperHomeVM parent, Account acct) {
             Parent = parent;
             LoggedInUser = acct;
-            ReadInDataFromXML();
+            ReadInDataFromXML(); // DELETE THIS
         }
 
         private void UpdateCartClicked(object obj) {
@@ -103,7 +103,7 @@ namespace PetShop {
                     }
                 }
                 // Save all updated data to the XML file and refresh the displayed items in the cart and list box
-                SaveDataToXML();
+                SaveDataToXML(); // DELETE THIS 
                 CollectionViewSource.GetDefaultView(Parent.Cart).Refresh();
                 CollectionViewSource.GetDefaultView(Parent.lb.ItemsSource).Refresh();
             }
@@ -154,9 +154,10 @@ namespace PetShop {
             } catch (Exception e) {
                 MessageBox.Show("Error, please reload the program. " + e);
             }
-            SaveDataToXML();
+            SaveDataToXML(); // DELETE THIS 
         }
 
+        // DELETE THESE TWO METHODS
         private void SaveDataToXML() {
             using (FileStream writeStream = new FileStream(userPath, FileMode.Create, FileAccess.ReadWrite)) {
                 AcctSerializer.Serialize(writeStream, AccountList);

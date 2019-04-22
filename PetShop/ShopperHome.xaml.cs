@@ -26,7 +26,7 @@ namespace PetShop {
             WelcomeMessage.Header = $"Welcome to the Pet Shop, {acct.FirstName}!";
             ShopperHomeVM shopperHomeVM = new ShopperHomeVM(LoggedInShopper);
             DataContext = shopperHomeVM;
-            MessageBox.Show("Welcome to the Pet Shop! Enjoy your new furry friend!","Hey there!");
+           // MessageBox.Show("Welcome to the Pet Shop! Enjoy your new furry friend!","Hey there!");
         }
 
         // When the user logs back in, their cart will still show its contents from when they last logged out
