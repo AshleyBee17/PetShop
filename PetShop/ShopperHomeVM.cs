@@ -270,7 +270,7 @@ namespace PetShop {
                     PostgreSQL.searchByAge(SearchText);
                     // search for the search text in the db using one of the 
                     // postgresql.cs functions written
-
+                    
                     
                     ShopperHome sh = new ShopperHome(LoggedInUser);
 
@@ -282,13 +282,46 @@ namespace PetShop {
                 } else if (SearchType == "Type")
                 {
 
+                    PostgreSQL.searchByType(SearchText);
+                    // search for the search text in the db using one of the 
+                    // postgresql.cs functions written
+
+
+                    ShopperHome sh = new ShopperHome(LoggedInUser);
+
+                    // set the results to AnimalCollection or something
+
+                    closeWindows();
+                    sh.Show();
+
                 } else if (SearchType == "Price")
                 {
+                    PostgreSQL.searchByPrice(SearchText);
+                    // search for the search text in the db using one of the 
+                    // postgresql.cs functions written
+
+
+                    ShopperHome sh = new ShopperHome(LoggedInUser);
+
+                    // set the results to AnimalCollection or something
+
+                    closeWindows();
+                    sh.Show();
 
                 }
                 else if (SearchType == "Zipcode")
                 {
+                    PostgreSQL.searchByZip(SearchText);
+                    // search for the search text in the db using one of the 
+                    // postgresql.cs functions written
 
+
+                    ShopperHome sh = new ShopperHome(LoggedInUser);
+
+                    // set the results to AnimalCollection or something
+
+                    closeWindows();
+                    sh.Show();
                 }
 
             }
