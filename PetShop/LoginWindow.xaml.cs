@@ -24,21 +24,15 @@ namespace PetShop {
         Account Account = new Account();
         public static Account AccountToLogin = new Account();
 
-        XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Account>));
-        string path = "userAccounts.xml";
 
         public LoginWindow() {
             InitializeComponent();
 
             try {
                 ReadInAllaData();
-                //ReadAccountsFromMemory();
             } catch {
-
                 Console.WriteLine("Database could not be opened to be read.");
                 MessageBox.Show("Database could not be opened to be read.");
-                //Console.WriteLine("File could not be opened to be read.");
-                //MessageBox.Show($"{path} failed to open because it is empty or does not exist. The file has now been created for you.","File Failed to Open");
             }
         }
 
@@ -79,14 +73,6 @@ namespace PetShop {
             }
         }
 
-        /*   private void ReadAccountsFromMemory() {
-               using (FileStream readStream = new FileStream(path, FileMode.Open, FileAccess.Read)) {
-                   AccountList = serializer.Deserialize(readStream) as ObservableCollection<Account>;
-               }
-           }
-
-       */
-
         private void LogIn(object sender, RoutedEventArgs e) {
             if (CheckUsernamePassword()) {
                 if (AccountToLogin.Type == "Seller") {
@@ -115,14 +101,12 @@ namespace PetShop {
             if (ValidateAllEntries()) {
                 AccountListTemp1 = PostgreSQL.searchByUsername(UsernameEntry.Text);
 
-                //Account acct = AccountList.FirstOrDefault(a => a.Username == UsernameEntry.Text);
-
                 if (AccountListTemp1 == null) {
                     Verify.Visibility = Visibility.Visible;
                     return false;
                 } else {
                     AccountListTemp2 = PostgreSQL.validateUsernamePassword(UsernameEntry.Text, PasswordEntry.Password);
-                    if (AccountListTemp2 == null /*acct.Password == PasswordEntry.Password*/) {
+                    if (AccountListTemp2.Count == 0) {
                         Verify.Visibility = Visibility.Visible;
                         return false;
                         
