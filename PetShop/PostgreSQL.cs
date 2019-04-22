@@ -222,6 +222,38 @@ namespace PetShop {
             return returnAccounts(dataTable);
         }
 
+        public static ObservableCollection<Account> getAllSellers()
+        {
+            conn = new NpgsqlConnection(cs);
+            conn.Open();
+            sql = "SELECT * FROM sellers;";
+            npgCommand = new NpgsqlCommand(sql, conn);
+
+            NpgsqlDataAdapter npgsqlDataAdapter = new NpgsqlDataAdapter(npgCommand);
+            DataTable dataTable = new DataTable();
+
+            npgsqlDataAdapter.Fill(dataTable);
+
+            conn.Close();
+            return returnAccounts(dataTable);
+        }
+
+        public static ObservableCollection<Account> getAllShoppers()
+        {
+            conn = new NpgsqlConnection(cs);
+            conn.Open();
+            sql = "SELECT * FROM shoppers;";
+            npgCommand = new NpgsqlCommand(sql, conn);
+
+            NpgsqlDataAdapter npgsqlDataAdapter = new NpgsqlDataAdapter(npgCommand);
+            DataTable dataTable = new DataTable();
+
+            npgsqlDataAdapter.Fill(dataTable);
+
+            conn.Close();
+            return returnAccounts(dataTable);
+        }
+
         public static void addAccount(Account a)
         {
             conn = new NpgsqlConnection(cs);
@@ -252,12 +284,11 @@ namespace PetShop {
             npgCommand = new NpgsqlCommand();
             npgCommand.Connection = conn;
 
-            npgCommand.CommandText = "INSERT INTO public.sellers(\"SellerID\", \"PetID\", \"Zipcode\") " +
-                "VALUES (@i, @p, @z)";
+            npgCommand.CommandText = "INSERT INTO public.sellers(\"SellerID\", \"PetID\") " +
+                "VALUES (@i, @p)";
 
             npgCommand.Parameters.AddWithValue("i", a.id);
             npgCommand.Parameters.AddWithValue("p", e.PetID);
-            npgCommand.Parameters.AddWithValue("z", a.ZipCode);
 
             npgCommand.ExecuteNonQuery();
             conn.Close();
@@ -317,7 +348,6 @@ namespace PetShop {
             npgCommand.CommandText = "UPDATE public.sellers SET " +
                 "\"SellerID\"=\'" + a.id + "\'," +
                 "\"PetID\"=\'" + e.PetID + "\'," +
-                "\"Zipcode\"=\'" + a.ZipCode + 
                 "\' WHERE \"SellerID\"=\'" + id + "\';";
 
             npgCommand.ExecuteNonQuery();
@@ -346,7 +376,7 @@ namespace PetShop {
 
             conn = new NpgsqlConnection(cs);
             conn.Open();
-            sql = "SELECT * FROM users WHERE \"Username\"=\'" + username + "\' AND \"Password\"=\'"+password+"\';";
+            sql = "SELECT * FROM users WHERE \"Username\"=\'" + username + "\' AND \"Password\"=\'" + password + "\';";
             npgCommand = new NpgsqlCommand(sql, conn);
 
             NpgsqlDataAdapter npgsqlDataAdapter = new NpgsqlDataAdapter(npgCommand);
@@ -386,7 +416,6 @@ namespace PetShop {
             {
                 Account a = new Account();
                 a.id = row.Field<int>("SellerID");
-                a.ZipCode = row.Field<string>("Zipcode");
                 sellersList.Add(a);
             }
             conn.Close();

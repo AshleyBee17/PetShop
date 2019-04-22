@@ -49,14 +49,16 @@ namespace PetShop {
                     openLogin(Account);
                 } else if (Seller.IsChecked == true) {
                     Account.Type = Seller.Content.ToString();
-                    ZipCodePanel.Visibility = Visibility.Visible;
-                    if (string.IsNullOrWhiteSpace(ZipEntry.Text)) {
-                        MessageBox.Show("One more thing! - Please enter your zip code to finish creating your account");
-                    }
-                    if (validateZip()) {
-                        Account.ZipCode = ZipEntry.Text;
-                        openLogin(Account);
-                    }
+                    openLogin(Account);
+
+                    //ZipCodePanel.Visibility = Visibility.Hidden;
+                    //if (string.IsNullOrWhiteSpace(ZipEntry.Text)) {
+                      //  MessageBox.Show("One more thing! - Please enter your zip code to finish creating your account");
+                   // }
+                   // if (validateZip()) {
+                   //     Account.ZipCode = ZipEntry.Text;
+                   //     openLogin(Account);
+                  //  }
                 }
 
                 
