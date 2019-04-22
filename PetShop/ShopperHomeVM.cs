@@ -311,7 +311,7 @@ namespace PetShop {
                 }
                 else if (SearchType == "Zipcode")
                 {
-                   var zipcodeSearch = PostgreSQL.searchByZip(SearchText);
+                   var zipcodeSearch = PostgreSQL.searchByZip(zipcodeSearch);
                     // search for the search text in the db using one of the 
                     // postgresql.cs functions written
 
