@@ -271,7 +271,7 @@ namespace PetShop {
                     // search for the search text in the db using one of the 
                     // postgresql.cs functions written
                     
-                    
+                    //arbitrary comments
                     ShopperHome sh = new ShopperHome(LoggedInUser);
 
                     // set the results to AnimalCollection or something
@@ -281,7 +281,7 @@ namespace PetShop {
 
                 } else if (SearchType == "Type")
                 {
-
+                    //hello jelina and ashley
                     PostgreSQL.searchByType(SearchText);
                     // search for the search text in the db using one of the 
                     // postgresql.cs functions written
