@@ -251,6 +251,11 @@ namespace PetShop {
         }
 
         private void SearchPets(object o) {
+
+             lb = obj as ListBox;
+            Animal selectedAnimal = lb.SelectedItem as Animal;
+            isCartEmpty = (Cart.Count == 0) ? true : false;
+
             if(SearchText == null){
                 MessageBox.Show("Please enter a search critera");
             } else {
@@ -259,8 +264,8 @@ namespace PetShop {
                 {
                     // search for the search text in the db using one of the 
                     // postgresql.cs functions written
+                    var ageSearch = PostgreSQL.searchByAge(selectedAnimal.Age);
 
-                    
                     ShopperHome sh = new ShopperHome(LoggedInUser);
 
                     // set the results to AnimalCollection or something
@@ -268,10 +273,43 @@ namespace PetShop {
                     closeWindows();
                     sh.Show();
 
-                } else if (SearchType == "Type")
+                } else if (SearchType == "zip")
                 {
+                    var zipSearch = PostgreSQL.searchByZip(selectedAnimal.Zipcode);
 
-                } // Continue...
+                    ShopperHome sh = new ShopperHome(LoggedInUser);
+
+                    // set the results to AnimalCollection or something
+
+                    closeWindows();
+                    sh.Show();
+
+                }else if(SearchType = "price" )
+                   {
+                    var priceSearch = PostgreSQL.searchByType(selectedAnimal.Price);
+                    ShopperHome sh = new ShopperHome(LoggedInUser);
+
+                    // set the results to AnimalCollection or something
+
+                    closeWindows();
+                    sh.Show();
+                }
+                else if(SearchType = "type")
+                    {
+                    var typeSearch = PostgreSQL.searchByType(selectedAnimal.Type);
+                            
+                    ShopperHome sh = new ShopperHome(LoggedInUser);
+
+                    // set the results to AnimalCollection or something
+
+                    closeWindows();
+                    sh.Show();
+                }
+                else{
+                    MessageBox.Show("please enter a valid search entry");
+
+
+}
 
             }
         }
