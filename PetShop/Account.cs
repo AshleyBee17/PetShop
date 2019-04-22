@@ -40,5 +40,48 @@ namespace PetShop {
             CartTotal = cartTotal;
             
         }
+
+        public Account(int Id, string firstName, string lastName, string username, string password,
+            string type, string telephone, string zipcode, string cartItems, string cartTotal)
+        {
+            id = Id;
+            FirstName = firstName;
+            LastName = lastName;
+            Username = username;
+            Password = password;
+            Telephone = telephone;
+            Type = type;
+            ZipCode = zipcode;
+            CartItems = cartItems;
+            CartTotal = CartTotal;
+
+        }
+
+        public Account(int Id, string firstName, string lastName, string username, string password,
+            string type, string telephone)
+        {
+            id = Id;
+            FirstName = firstName;
+            LastName = lastName;
+            Username = username;
+            Password = password;
+            Telephone = telephone;
+            Type = type;
+        }
+
+        public Account(int Id, string zipcode)
+        {
+            id = id;
+            ZipCode = zipcode;
+        }
+
+        public Account(int Id, string cartItems, string cartTotal)
+        {
+            id = id;
+            CartItems = cartItems;
+            CartTotal = cartTotal;
+        }
+
+
     }
 }

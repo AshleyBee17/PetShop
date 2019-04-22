@@ -204,6 +204,209 @@ namespace PetShop {
             conn.Close();
         }
 
+        public static ObservableCollection<Account> getAllAccounts()
+        {
+            conn = new NpgsqlConnection(cs);
+            conn.Open();
+            sql = "SELECT * FROM users;";
+            npgCommand = new NpgsqlCommand(sql, conn);
+
+            NpgsqlDataAdapter npgsqlDataAdapter = new NpgsqlDataAdapter(npgCommand);
+            DataTable dataTable = new DataTable();
+
+            npgsqlDataAdapter.Fill(dataTable);
+
+            conn.Close();
+            return returnAccounts(dataTable);
+        }
+
+        public static void addAccount(Account a)
+        {
+            conn = new NpgsqlConnection(cs);
+            conn.Open();
+
+            npgCommand = new NpgsqlCommand();
+            npgCommand.Connection = conn;
+
+            npgCommand.CommandText = "INSERT INTO public.users(\"Username\", \"FirstName\", \"LastName\", \"Phone\", \"Type\", \"Password\") " +
+                "VALUES (@s, @t, @a, @q, @p, @l)";
+
+            npgCommand.Parameters.AddWithValue("s", a.Username);
+            npgCommand.Parameters.AddWithValue("t", a.FirstName);
+            npgCommand.Parameters.AddWithValue("a", a.LastName);
+            npgCommand.Parameters.AddWithValue("q", a.Telephone);
+            npgCommand.Parameters.AddWithValue("p", a.Type);
+            npgCommand.Parameters.AddWithValue("l", a.Password);
+
+            npgCommand.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        public static void addSeller(Account a, Animal e)
+        {
+            conn = new NpgsqlConnection(cs);
+            conn.Open();
+
+            npgCommand = new NpgsqlCommand();
+            npgCommand.Connection = conn;
+
+            npgCommand.CommandText = "INSERT INTO public.sellers(\"SellerID\", \"PetID\", \"Zipcode\") " +
+                "VALUES (@i, @p, @z)";
+
+            npgCommand.Parameters.AddWithValue("i", a.id);
+            npgCommand.Parameters.AddWithValue("p", e.PetID);
+            npgCommand.Parameters.AddWithValue("z", a.ZipCode);
+
+            npgCommand.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        public static void addShopper(Account a, Animal e)
+        {
+            conn = new NpgsqlConnection(cs);
+            conn.Open();
+
+            npgCommand = new NpgsqlCommand();
+            npgCommand.Connection = conn;
+
+            npgCommand.CommandText = "INSERT INTO public.shoppers(\"ShopperID\", \"PetID\", \"CartItems\", \"CartTotal\") " +
+                "VALUES (@i, @p, @ci, @ct)";
+
+            npgCommand.Parameters.AddWithValue("i", a.id);
+            npgCommand.Parameters.AddWithValue("p", e.PetID);
+            npgCommand.Parameters.AddWithValue("ci", a.CartItems);
+            npgCommand.Parameters.AddWithValue("ct", a.CartTotal);
+
+            npgCommand.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        public static void editShopper(Account a, Animal e)
+        {
+            string id = a.id.ToString();
+
+            conn = new NpgsqlConnection(cs);
+            conn.Open();
+
+            npgCommand = new NpgsqlCommand();
+            npgCommand.Connection = conn;
+
+            npgCommand.CommandText = "UPDATE public.shoppers SET " +
+                "\"ShopperID\"=\'" + a.id + "\'," +
+                "\"PetID\"=\'" + e.PetID + "\'," +
+                "\"CartItems\"=\'" + a.CartItems + "\'," +
+                "\"CartTotal\"=\'" + a.CartTotal + 
+                "\' WHERE \"ShopperID\"=\'" + id + "\';";
+
+            npgCommand.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        public static void editSeller(Account a, Animal e)
+        {
+            string id = a.id.ToString();
+
+            conn = new NpgsqlConnection(cs);
+            conn.Open();
+
+            npgCommand = new NpgsqlCommand();
+            npgCommand.Connection = conn;
+
+            npgCommand.CommandText = "UPDATE public.sellers SET " +
+                "\"SellerID\"=\'" + a.id + "\'," +
+                "\"PetID\"=\'" + e.PetID + "\'," +
+                "\"Zipcode\"=\'" + a.ZipCode + 
+                "\' WHERE \"SellerID\"=\'" + id + "\';";
+
+            npgCommand.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        public static ObservableCollection<Account> searchByUsername(string username)
+        {
+
+            conn = new NpgsqlConnection(cs);
+            conn.Open();
+            sql = "SELECT * FROM users WHERE \"Username\"=\'" + username + "\';";
+            npgCommand = new NpgsqlCommand(sql, conn);
+
+            NpgsqlDataAdapter npgsqlDataAdapter = new NpgsqlDataAdapter(npgCommand);
+            DataTable dataTable = new DataTable();
+
+            npgsqlDataAdapter.Fill(dataTable);
+
+            conn.Close();
+            return returnAccounts(dataTable);
+        }
+
+        public static ObservableCollection<Account> validateUsernamePassword(string username, string password)
+        {
+
+            conn = new NpgsqlConnection(cs);
+            conn.Open();
+            sql = "SELECT * FROM users WHERE \"Username\"=\'" + username + "\' AND \"Password\"=\'"+password+"\';";
+            npgCommand = new NpgsqlCommand(sql, conn);
+
+            NpgsqlDataAdapter npgsqlDataAdapter = new NpgsqlDataAdapter(npgCommand);
+            DataTable dataTable = new DataTable();
+
+            npgsqlDataAdapter.Fill(dataTable);
+
+            conn.Close();
+            return returnAccounts(dataTable);
+        }
+        private static ObservableCollection<Account> returnAccounts(DataTable d)
+        {
+            ObservableCollection<Account> accountList = new ObservableCollection<Account>();
+
+            foreach (DataRow row in d.Rows)
+            {
+                Account a = new Account();
+                a.id = row.Field<int>("UserID");
+                a.FirstName = row.Field<string>("FirstName");
+                a.LastName = row.Field<string>("LastName");
+                a.Username = row.Field<string>("Username");
+                a.Password = row.Field<string>("Password");
+                a.Type = row.Field<string>("Type");
+                a.Telephone = row.Field<string>("Phone");
+
+                accountList.Add(a);
+            }
+            conn.Close();
+            return accountList;
+        }
+
+        private static ObservableCollection<Account> returnSellers(DataTable d)
+        {
+            ObservableCollection<Account> sellersList = new ObservableCollection<Account>();
+
+            foreach (DataRow row in d.Rows)
+            {
+                Account a = new Account();
+                a.id = row.Field<int>("SellerID");
+                a.ZipCode = row.Field<string>("Zipcode");
+                sellersList.Add(a);
+            }
+            conn.Close();
+            return sellersList;
+        }
+
+        private static ObservableCollection<Account> returnShoppers(DataTable d)
+        {
+            ObservableCollection<Account> shoppersList = new ObservableCollection<Account>();
+
+            foreach (DataRow row in d.Rows)
+            {
+                Account a = new Account();
+                a.id = row.Field<int>("ShopperID");
+                a.CartItems = row.Field<string>("CartItems");
+                a.CartTotal = row.Field<string>("CartTotal");
+                shoppersList.Add(a);
+            }
+            conn.Close();
+            return shoppersList;
+        }
+
     }
 }
   
