@@ -42,13 +42,18 @@ namespace PetShop {
                 Account.CartTotal = "0";
                 Account.CartContent = new ObservableCollection<Animal>();
                 Account.PreviousPurchases = new ObservableCollection<Animal>();
+                
 
                 if (Shopper.IsChecked == true) {
                     Account.Type = Shopper.Content.ToString();
+                    PostgreSQL.addAccount(Account);
+                    PostgreSQL.addShopper(Account, null);
                     ZipCodePanel.Visibility = Visibility.Hidden;
                     openLogin(Account);
                 } else if (Seller.IsChecked == true) {
                     Account.Type = Seller.Content.ToString();
+                    PostgreSQL.addAccount(Account);
+                    PostgreSQL.addSeller(Account, null);
                     openLogin(Account);
 
                     //ZipCodePanel.Visibility = Visibility.Hidden;
