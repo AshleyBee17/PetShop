@@ -42,6 +42,7 @@ namespace PetShop {
                 MessageBox.Show("Adding to the database...");
                 Animal a = new Animal(LoggedInSeller.id, petType, petAge, petSize, petQuantity, petPrice, petZip);
                 PostgreSQL.addPet(a);
+                PostgreSQL.addSeller(LoggedInSeller, a);
                 SellerHome sh = new SellerHome(LoggedInSeller);
                 sh.Show();
                 this.Close();

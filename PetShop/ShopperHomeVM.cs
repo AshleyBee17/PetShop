@@ -15,12 +15,12 @@ using System.Xml.Serialization;
 namespace PetShop {
     public class ShopperHomeVM : INotifyPropertyChanged {
 
-        XmlSerializer AcctSerializer = new XmlSerializer(typeof(ObservableCollection<Account>));
-        XmlSerializer PetSerializer = new XmlSerializer(typeof(ObservableCollection<Animal>));
+        //XmlSerializer AcctSerializer = new XmlSerializer(typeof(ObservableCollection<Account>));
+        //XmlSerializer PetSerializer = new XmlSerializer(typeof(ObservableCollection<Animal>));
         ObservableCollection<Animal> AnimalCollection;
         ObservableCollection<Account> AccountList;
-        string userPath = "userAccounts.xml";
-        string animalPath = "animals.xml";
+        //string userPath = "userAccounts.xml";
+        //string animalPath = "animals.xml";
         Account LoggedInUser;
 
         private Account _accountCartTotal;
@@ -183,7 +183,8 @@ namespace PetShop {
                                 }
                             }
                             CollectionViewSource.GetDefaultView(selectedAnimal.Quantity).Refresh();
-                            SaveDataToXML();
+                            PostgreSQL.addShopper(LoggedInUser, selectedAnimal);
+                            //SaveDataToXML();
                         }
                     } else {
                         foreach(object o in Cart.ToList())
@@ -210,7 +211,8 @@ namespace PetShop {
                                 }
                             }
                             CollectionViewSource.GetDefaultView(selectedAnimal.Quantity).Refresh();
-                            SaveDataToXML();
+                            PostgreSQL.addShopper(LoggedInUser, selectedAnimal);
+                            //SaveDataToXML();
                             }
                         }
                     }
@@ -218,7 +220,8 @@ namespace PetShop {
             }
         }
 
-        private void SaveDataToXML() {
+
+        /*private void SaveDataToXML() {
             using (FileStream writeStream = new FileStream(userPath, FileMode.Create, FileAccess.ReadWrite)) {
                 AcctSerializer.Serialize(writeStream, AccountList);
             }
@@ -234,7 +237,7 @@ namespace PetShop {
             using (FileStream readStream = new FileStream(userPath, FileMode.Open, FileAccess.Read)) {
                 AccountList = AcctSerializer.Deserialize(readStream) as ObservableCollection<Account>; 
             }
-        }
+        }*/
 
         private void ReviewOrder(object obj) {
             ShoppingCartVM scVM = new ShoppingCartVM(this, LoggedInUser);
