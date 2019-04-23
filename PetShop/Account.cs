@@ -35,7 +35,6 @@ namespace PetShop {
             Type = type;
             CartItems = cartItems;
             CartTotal = cartTotal;
-            
         }
 
         public Account(int Id, string firstName, string lastName, string username, string password,
@@ -49,7 +48,7 @@ namespace PetShop {
             Telephone = telephone;
             Type = type;
             CartItems = cartItems;
-            CartTotal = CartTotal;
+            CartTotal = cartTotal;
 
         }
 

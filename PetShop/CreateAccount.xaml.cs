@@ -58,9 +58,7 @@ namespace PetShop {
                     PostgreSQL.addAccount(Account);
                     //PostgreSQL.addSeller(Account, null);
                     openLogin(Account);
-                }
-
-                
+                }             
             }
         }
 

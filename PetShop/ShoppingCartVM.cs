@@ -27,7 +27,7 @@ namespace PetShop {
         public ShoppingCartVM(ShopperHomeVM parent, Account acct) {
             Parent = parent;
             LoggedInUser = acct;
-            ReadInDataFromXML(); // DELETE THIS
+            //ReadInDataFromXML(); // DELETE THIS
         }
 
         private void UpdateCartClicked(object obj) {

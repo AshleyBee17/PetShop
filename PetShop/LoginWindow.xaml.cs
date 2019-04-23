@@ -27,13 +27,15 @@ namespace PetShop {
 
         public LoginWindow() {
             InitializeComponent();
-
+            
             try {
                 ReadInAllaData();
             } catch {
                 Console.WriteLine("Database could not be opened to be read.");
                 MessageBox.Show("Database could not be opened to be read.");
             }
+            
+
         }
 
         public LoginWindow(Account acct) {
@@ -49,7 +51,7 @@ namespace PetShop {
             //    serializer.Serialize(writeStream, AccountList);
             //}
         }
-
+        
         private void ReadInAllaData()
         {
 
@@ -72,7 +74,7 @@ namespace PetShop {
                 ShoppersList = new ObservableCollection<Account>();
             }
         }
-
+        
         private void LogIn(object sender, RoutedEventArgs e) {
             if (CheckUsernamePassword()) {
                 if (AccountToLogin.Type == "Seller") {

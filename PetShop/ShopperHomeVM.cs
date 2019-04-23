@@ -184,9 +184,13 @@ namespace PetShop {
 
                             foreach (Account a in AccountList) {
                                 if (a.id == LoggedInUser.id) { // CHANGE THIS TO ACCOUNT ID
-                                    a.CartContent.Add(selectedAnimal);
-                                    a.CartTotal = TotalCost.ToString(); 
-                                    a.CartItems = TotalItem.ToString(); 
+                                    if (LoggedInUser.CartContent == null)
+                                    {
+                                        LoggedInUser.CartContent = new ObservableCollection<Animal>();
+                                    }
+                                    LoggedInUser.CartContent.Add(selectedAnimal);
+                                    LoggedInUser.CartTotal = TotalCost.ToString();
+                                    LoggedInUser.CartItems = TotalItem.ToString(); 
                                 }
                             }
                             CollectionViewSource.GetDefaultView(selectedAnimal.Quantity).Refresh();
@@ -226,25 +230,6 @@ namespace PetShop {
                 }
             }
         }
-
-
-        /*private void SaveDataToXML() {
-            using (FileStream writeStream = new FileStream(userPath, FileMode.Create, FileAccess.ReadWrite)) {
-                AcctSerializer.Serialize(writeStream, AccountList);
-            }
-            using (FileStream writeStream = new FileStream(animalPath, FileMode.Create, FileAccess.ReadWrite)) {
-                PetSerializer.Serialize(writeStream, AnimalCollection);
-            }
-        }
-
-        private void ReadInDataFromXML() {
-            using (FileStream readStream = new FileStream(animalPath,  FileMode.Open, FileAccess.Read)) {
-                AnimalCollection = PetSerializer.Deserialize(readStream) as ObservableCollection<Animal>;
-            }
-            using (FileStream readStream = new FileStream(userPath, FileMode.Open, FileAccess.Read)) {
-                AccountList = AcctSerializer.Deserialize(readStream) as ObservableCollection<Account>; 
-            }
-        }*/
 
         private void ReviewOrder(object obj) {
             ShoppingCartVM scVM = new ShoppingCartVM(this, LoggedInUser);

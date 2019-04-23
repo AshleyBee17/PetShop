@@ -20,7 +20,7 @@ namespace PetShop {
         static string cs = "Server=localhost;" +
                             "Port=5432;" +
                             "Username=postgres;" +
-                            "Password=postgres;" +
+                            "Password=14ae486acc344b86f85908647d9c2fd3d4b3dbaaea06f5f4d1e2c38840be9ee6;" +
                             "Database=postgres;";
 
         private static ObservableCollection<Animal> returnAnimals(DataTable d) {
@@ -266,7 +266,7 @@ namespace PetShop {
             npgsqlDataAdapter.Fill(dataTable);
 
             conn.Close();
-            return returnAccounts(dataTable);
+            return returnShoppers(dataTable);
         }
 
         public static void addAccount(Account a)
@@ -320,16 +320,29 @@ namespace PetShop {
             npgCommand = new NpgsqlCommand();
             npgCommand.Connection = conn;
 
-            npgCommand.CommandText = "INSERT INTO public.shoppers(\"ShopperID\", \"PetID\", \"CartItems\", \"CartTotal\") " +
-                "VALUES (@i, @p, @ci, @ct)";
+            ObservableCollection<Account> acctlist = getAllShoppers();
 
-                npgCommand.Parameters.AddWithValue("i", a.id);
-                npgCommand.Parameters.AddWithValue("p", e.PetID);
-                npgCommand.Parameters.AddWithValue("ci", a.CartItems);
-                npgCommand.Parameters.AddWithValue("ct", a.CartTotal);
-                npgCommand.ExecuteNonQuery();
-                conn.Close();
+            foreach(Account acct in acctlist){
+                if(acct.id == a.id)
+                {
+                    npgCommand.CommandText = "UPDATE public.shoppers" +
+                        "SET \"ShopperID\"=" + a.id + ", \"PetID\"=" + e.PetID + ", \"CartItems\"=" + a.CartItems + ", \"CartTotal\"=" + a.CartTotal + "" +
+                        "WHERE ShopperID="+ a.id;
 
+                    npgCommand.ExecuteNonQuery();
+                    conn.Close();
+                } else {
+                    npgCommand.CommandText = "INSERT INTO public.shoppers(\"ShopperID\", \"PetID\", \"CartItems\", \"CartTotal\") " +
+                                    "VALUES (@i, @p, @ci, @ct)";
+
+                    npgCommand.Parameters.AddWithValue("i", a.id);
+                    npgCommand.Parameters.AddWithValue("p", e.PetID);
+                    npgCommand.Parameters.AddWithValue("ci", a.CartItems);
+                    npgCommand.Parameters.AddWithValue("ct", a.CartTotal);
+                    npgCommand.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }      
         }
 
         public static void editShopper(Account a, Animal e)
@@ -457,6 +470,7 @@ namespace PetShop {
             conn.Close();
             return accountList;
         }
+
 
         private static ObservableCollection<Account> returnSellers(DataTable d)
         {
