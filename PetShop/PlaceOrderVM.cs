@@ -19,10 +19,7 @@ namespace PetShop {
 
         public static ObservableCollection<Animal> AnimalCollection { get; set; }
         public static ObservableCollection<Account> AccountList { get; set; } 
-        XmlSerializer PetSerializer = new XmlSerializer(typeof(ObservableCollection<Animal>));
-        XmlSerializer AcctSerializer = new XmlSerializer(typeof(ObservableCollection<Account>));
-        string animalPath = "animals.xml";
-        string userPath = "userAccounts.xml";
+        
 
         public ShopperHomeVM Parent { get; set; }
         public Account LoggedInShopper;
@@ -31,14 +28,7 @@ namespace PetShop {
         public PlaceOrderVM(ShopperHomeVM parent, Account acct) {
             this.Parent = parent;
             this.LoggedInShopper = acct;
-           /*
-            try {
-                ReadInDataFromXML();
-            } catch {
-                Console.WriteLine("File could not be opened to be read.");
-                MessageBox.Show($"File failed to open because it is empty or does not exist. The file has now been created for you.","File Failed to Open");
-            }
-            */
+         
             AnimalCollection = PostgreSQL.getAllPets();
             AccountList = PostgreSQL.getAllAccounts();
 
@@ -47,16 +37,7 @@ namespace PetShop {
             this.ReceiptText = header;
             UpdateQuantities();
         }
-        /*
-        private void ReadInDataFromXML() {
-            using (FileStream readStream = new FileStream(animalPath,  FileMode.Open, FileAccess.Read)) {
-                AnimalCollection = PetSerializer.Deserialize(readStream) as ObservableCollection<Animal>;
-            }
-            using (FileStream readStream = new FileStream(userPath, FileMode.Open, FileAccess.Read)) {
-                AccountList = AcctSerializer.Deserialize(readStream) as ObservableCollection<Account>; 
-            }
-        }
-        */
+        
         private void UpdateQuantities() {           
             foreach (Animal a in Parent.Cart) {
                 foreach (Animal animal in AnimalCollection) {
@@ -68,30 +49,21 @@ namespace PetShop {
                 
                 foreach (Account acc in AccountList) {
                    if (acc.id == LoggedInShopper.id) { 
-                       foreach (Animal o in acc.CartContent.ToList()) {
-                           if(o.PetID == a.PetID) { 
-                               acc.PreviousPurchases.Add(o);                        
-                               acc.CartContent.Remove(o);
+                       foreach (Animal o in LoggedInShopper.CartContent.ToList()) {
+                           if(o.PetID == a.PetID) {
+                                //LoggedInShopper.PreviousPurchases.Add(o);
+                                LoggedInShopper.CartContent.Remove(o);
                            }
-                       } 
-                       acc.CartTotal = "0";
-                       acc.CartItems = "0";
-                       //Parent.TotalItem = 0;
-                       //Parent.TotalCost = 0;
+                       }
+                        LoggedInShopper.CartTotal = "0";
+                        LoggedInShopper.CartItems = "0";
+                       
                    }
                 }    
             }
-            //SaveDataToXML();
+            
         }
-        /*
-        private void SaveDataToXML() {
-            using (FileStream writeStream = new FileStream(userPath, FileMode.Create, FileAccess.ReadWrite)) {
-                AcctSerializer.Serialize(writeStream, AccountList);
-            }
-            using (FileStream writeStream = new FileStream(animalPath, FileMode.Create, FileAccess.ReadWrite)) {
-                PetSerializer.Serialize(writeStream, AnimalCollection);
-            }
-        }*/
+        
 
         private void SaveReceipt(object obj) {
             List<string> receipt = new List<string>();

@@ -92,7 +92,7 @@ namespace PetShop {
                         }
                         foreach(Account acc in AccountList) {
                             if (acc.id == LoggedInUser.id) { 
-                                foreach (Animal o in acc.CartContent.ToList()) {
+                                foreach (Animal o in LoggedInUser.CartContent.ToList()) {
                                     if(o.PetID == an.PetID) { 
                                         acc.CartContent.Remove(o);
                                         acc.CartTotal = sumTotal.ToString();

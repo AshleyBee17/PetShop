@@ -241,7 +241,7 @@ namespace PetShop {
         }
 
         private void SearchPets(object o) {
-            if(SearchText == null){
+            if(SearchText == null && SearchType != "All"){
                 MessageBox.Show("Please enter a search critera");
             } else {
 

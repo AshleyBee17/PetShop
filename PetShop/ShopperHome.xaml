@@ -44,6 +44,7 @@
                 <Label DockPanel.Dock="Bottom" Content="Search By"/>
                 <TextBox x:Name="QueryText" Text="{Binding SearchText}" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" Width="200" Height="25" Margin="5"/>
                 <ComboBox x:Name="SeachType" VerticalAlignment="Center" IsReadOnly="True" IsEditable="True" Text="{Binding SearchType}" Width="100" Height="25">
+                    <ComboBoxItem Content="All"/>
                     <ComboBoxItem Content="Age"/>
                     <ComboBoxItem Content="Type"/>
                     <ComboBoxItem Content="Price"/>

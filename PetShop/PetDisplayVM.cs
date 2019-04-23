@@ -38,6 +38,10 @@ namespace PetShop {
             } else if (ShopperHomeVM.stype == "Zipcode") {
                 AnimalCollection = PostgreSQL.searchByZip(ShopperHomeVM.stxt);
             }
+            else if (ShopperHomeVM.stype == "All")
+            {
+                ReadInAllData();
+            }
             else ReadInAllData();
         }
 
