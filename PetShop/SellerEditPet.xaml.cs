@@ -22,12 +22,12 @@ namespace PetShop {
         string petZip;
 
         Account LoggedInSeller;
-
+        int petID;
         public SellerEditPet(Account acct, Animal a) {
             InitializeComponent();
 
             this.LoggedInSeller = acct;
-            //this.petID = a.PetID;
+            this.petID = a.PetID;
 
             PetTypeEntry.Text = a.Type;
             PetSizeEntry.Text = a.Size;
@@ -47,7 +47,7 @@ namespace PetShop {
 
             if (CheckEntries()) {
                 MessageBox.Show("Updating database...");
-                Animal a = new Animal(LoggedInSeller.id, petType, petAge, petSize, petQuantity, petPrice, petZip);
+                Animal a = new Animal(petID, LoggedInSeller.id, petType, petAge, petSize, petQuantity, petPrice, petZip);
                 PostgreSQL.editPet(a);
                 PostgreSQL.editSeller(LoggedInSeller, a);
                 SellerHome sh = new SellerHome(LoggedInSeller);

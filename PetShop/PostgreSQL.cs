@@ -208,6 +208,7 @@ namespace PetShop {
             npgCommand = new NpgsqlCommand();
             npgCommand.Connection = conn;
 
+
             npgCommand.CommandText = "UPDATE public.pets SET " +
                 "\"Size\"=\'"+ a.Size +"\'," +
                 "\"Type\"=\'" + a.Type + "\'," +
