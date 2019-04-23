@@ -322,8 +322,23 @@ namespace PetShop {
 
             npgCommand = new NpgsqlCommand();
             npgCommand.Connection = conn;
+            try
+            {
 
 
+                npgCommand.CommandText = "INSERT INTO public.shoppers(\"ShopperID\", \"PetID\", \"CartItems\", \"CartTotal\") " +
+                                        "VALUES (@i, @p, @ci, @ct)";
+
+                npgCommand.Parameters.AddWithValue("i", a.id);
+                npgCommand.Parameters.AddWithValue("p", e.PetID);
+                npgCommand.Parameters.AddWithValue("ci", a.CartItems);
+                npgCommand.Parameters.AddWithValue("ct", a.CartTotal);
+                npgCommand.ExecuteNonQuery();
+                conn.Close();
+            } catch (Exception) {
+                Console.WriteLine("Pet already added");
+            }
+            /*
             foreach (Account acct in acctlist){
                 if(acct.id == a.id)
                 {
@@ -349,7 +364,7 @@ namespace PetShop {
                     npgCommand.ExecuteNonQuery();
                     conn.Close();
                 }
-            }      
+            }      */
         }
 
         public static void editShopper(Account a, Animal e)
