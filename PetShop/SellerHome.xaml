@@ -14,7 +14,6 @@
                     <DockPanel HorizontalAlignment="Stretch"/>
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
-            <MenuItem Header="Help"/>
             <MenuItem Header="Logout" Click="LogOut"/>
             <MenuItem Header="Add New Pet" Command="{Binding AddCommand}" CommandParameter="{Binding ElementName=PetDisplayItem, Path=Content}"/>
             <MenuItem Header="Remove Pet" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=PetDisplayItem, Path=Content}"/>

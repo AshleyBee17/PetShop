@@ -15,7 +15,6 @@
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
             
-            <MenuItem Header="Help" Click="SaveClick"/>
             <MenuItem Header="Log Out" Click="ExitClick"/>
         
            

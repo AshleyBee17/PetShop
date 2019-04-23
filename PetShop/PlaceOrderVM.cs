@@ -73,7 +73,7 @@ namespace PetShop {
             {
                 if(acc.Username == LoggedInShopper.Username)
                 {
-                    foreach(Animal a in acc.PreviousPurchases) {
+                    foreach(Animal a in LoggedInShopper.PreviousPurchases) {
                         int petTotal = int.Parse(a.Price) * int.Parse(a.PurchasedAmount);
                         cartTotal += petTotal;
                         receipt.Add($"{Environment.NewLine}Pet: {a.Type} {Environment.NewLine}Price: {a.Price} {Environment.NewLine}Amt Purchased: {a.PurchasedAmount} {Environment.NewLine}---------- Item Total: ${petTotal}");
