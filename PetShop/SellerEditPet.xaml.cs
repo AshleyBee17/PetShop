@@ -59,16 +59,16 @@ namespace PetShop {
         private bool CheckEntries() {
             bool ageValid, quanValid, zipValid, priceValid;
 
-            ageValid = string.IsNullOrWhiteSpace(PetAgeEntry.Text) ? false : true;
+            ageValid = string.IsNullOrWhiteSpace(PetAgeEntry.Text) || int.Parse(PetAgeEntry.Text) == 0 ? false : true;
             PetAgeEntry.BorderBrush = ageValid ? PetAgeEntry.BorderBrush = Brushes.Gray : PetAgeEntry.BorderBrush = Brushes.Red;
 
-            quanValid = string.IsNullOrWhiteSpace(PetQuantityEntry.Text) ? false : true;
+            quanValid = string.IsNullOrWhiteSpace(PetQuantityEntry.Text) || int.Parse(PetQuantityEntry.Text) == 0 ? false : true;
             PetQuantityEntry.BorderBrush = quanValid ? PetQuantityEntry.BorderBrush = Brushes.Gray : PetQuantityEntry.BorderBrush = Brushes.Red;
 
-            priceValid = string.IsNullOrWhiteSpace(PetPriceEntry.Text) ? false : true;
+            priceValid = string.IsNullOrWhiteSpace(PetPriceEntry.Text) || int.Parse(PetPriceEntry.Text) == 0  ? false : true;
             PetPriceEntry.BorderBrush = priceValid ? PetPriceEntry.BorderBrush = Brushes.Gray : PetPriceEntry.BorderBrush = Brushes.Red;
 
-            zipValid = string.IsNullOrWhiteSpace(PetZipEntry.Text) ? false : ValidateZip(PetZipEntry.Text);
+            zipValid = string.IsNullOrWhiteSpace(PetZipEntry.Text) || int.Parse(PetZipEntry.Text) == 0 ? false : ValidateZip(PetZipEntry.Text);
             PetZipEntry.BorderBrush = zipValid ? PetZipEntry.BorderBrush = Brushes.Gray : PetZipEntry.BorderBrush = Brushes.Red;
 
             return ageValid && quanValid && zipValid && priceValid;
