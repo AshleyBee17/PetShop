@@ -27,6 +27,7 @@ namespace PetShop {
         public ShoppingCartVM(ShopperHomeVM parent, Account acct) {
             Parent = parent;
             LoggedInUser = acct;
+            AccountList = PostgreSQL.getAllAccounts();
             //ReadInDataFromXML(); // DELETE THIS
         }
 
