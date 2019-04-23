@@ -37,7 +37,7 @@ namespace PetShop {
             }
             this.AccountList.Add(Account);
         }
-    
+
         private void LogIn(object sender, RoutedEventArgs e) {
             if (CheckUsernamePassword()) {
                 if (AccountToLogin.Type == "Seller") {

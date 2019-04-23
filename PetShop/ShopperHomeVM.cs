@@ -15,11 +15,6 @@ using System.Xml.Serialization;
 namespace PetShop {
     public class ShopperHomeVM : INotifyPropertyChanged {
 
-        //XmlSerializer AcctSerializer = new XmlSerializer(typeof(ObservableCollection<Account>));
-        //XmlSerializer PetSerializer = new XmlSerializer(typeof(ObservableCollection<Animal>));
-        
-        //string userPath = "userAccounts.xml";
-        //string animalPath = "animals.xml";
         Account LoggedInUser;
 
         public static string stype;
@@ -137,7 +132,7 @@ namespace PetShop {
         public ShopperHomeVM(Account acct) {
             this.LoggedInUser = acct;
             
-            //ReadInDataFromXML();
+   
             SearchType = "Age";
             if(LoggedInUser.CartContent != null) {
                 foreach(object o in LoggedInUser.CartContent) {
@@ -152,7 +147,6 @@ namespace PetShop {
 
         private void AddToCartClicked(object obj) {
 
-            //ObservableCollection<Animal> AnimalCollection;
             ObservableCollection<Account> AccountList;
             AnimalCollection = PostgreSQL.getAllPets();
             AccountList = PostgreSQL.getAllAccounts();
@@ -197,7 +191,6 @@ namespace PetShop {
                             }
                             CollectionViewSource.GetDefaultView(selectedAnimal.Quantity).Refresh();
                             PostgreSQL.addShopper(LoggedInUser, selectedAnimal);
-                            //SaveDataToXML();
                         }
                     } else {
                         foreach(object o in Cart.ToList())
@@ -226,7 +219,6 @@ namespace PetShop {
                             }
                             CollectionViewSource.GetDefaultView(selectedAnimal.Quantity).Refresh();
                             PostgreSQL.addShopper(LoggedInUser, selectedAnimal);
-                            //SaveDataToXML();
                             }
                         }
                     }
