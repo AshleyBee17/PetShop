@@ -257,7 +257,7 @@ namespace PetShop {
                     //closeWindows();
                     //AnimalCollection = PostgreSQL.searchByAge(SearchText);
                     //sh.Show();
-                    PetDisplayVM(1, SearchText);
+                   // PetDisplayVM(1, SearchText);
 
                 } else if (SearchType == "Type")
                 {
