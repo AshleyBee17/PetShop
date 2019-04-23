@@ -215,10 +215,11 @@ namespace PetShop {
                             CollectionViewSource.GetDefaultView(lb.ItemsSource).Refresh();
 
                             foreach (Account a in AccountList) {
-                                if (a.id == LoggedInUser.id) { // CHANGE THIS TO ACCOUNT ID
-                                    a.CartContent.Add(selectedAnimal);
-                                    a.CartTotal = TotalCost.ToString(); 
-                                    a.CartItems = TotalItem.ToString(); 
+                                if (a.id == LoggedInUser.id) { 
+                                      
+                                    LoggedInUser.CartContent.Add(selectedAnimal);
+                                    LoggedInUser.CartTotal = TotalCost.ToString(); 
+                                    LoggedInUser.CartItems = TotalItem.ToString(); 
                                 }
                             }
                             CollectionViewSource.GetDefaultView(selectedAnimal.Quantity).Refresh();
