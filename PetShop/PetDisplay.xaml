@@ -28,11 +28,11 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Grid.Column="1">
-                    <TextBlock.Text>
-                        <Binding Path="Type" StringFormat="Pet: {0}"/>
-                    </TextBlock.Text>
-                </TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="1" Text =" {Binding Pet}"/>
+                    
+                      
+                    
+                
 
                 <TextBlock Grid.Row="1" Grid.Column="1">
                     <TextBlock.Text>

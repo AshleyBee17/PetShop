@@ -311,20 +311,20 @@ namespace PetShop {
                     sh.Show();
 
                 }
-                else if (SearchType == "Zipcode")
-                {
-                   var zipcodeSearch = PostgreSQL.searchByZip(SearchText);
+               // else if (SearchType == "Zipcode")
+               // {
+                  // var zipcodeSearch = PostgreSQL.searchByZip();
                     // search for the search text in the db using one of the 
                     // postgresql.cs functions written
 
 
-                    ShopperHome sh = new ShopperHome(LoggedInUser);
+                  //  ShopperHome sh = new ShopperHome(LoggedInUser);
 
                     // set the results to AnimalCollection or something
 
-                    closeWindows();
-                    sh.Show();
-                }
+                  //  closeWindows();
+                   // sh.Show();
+               // }
 
             }
         }
