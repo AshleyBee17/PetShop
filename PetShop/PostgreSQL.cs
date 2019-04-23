@@ -17,10 +17,10 @@ namespace PetShop {
         private static NpgsqlCommand npgCommand;
         private static string sql = null;
 
-        static string cs = "Server=127.0.0.1;" +
+        static string cs = "Server=localhost;" +
                             "Port=5432;" +
                             "Username=postgres;" +
-                            "Password=14ae486acc344b86f85908647d9c2fd3d4b3dbaaea06f5f4d1e2c38840be9ee6;" +
+                            "Password=postgres;" +
                             "Database=postgres;";
 
         private static ObservableCollection<Animal> returnAnimals(DataTable d) {
