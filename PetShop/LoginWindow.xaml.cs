@@ -27,7 +27,7 @@ namespace PetShop {
 
         public LoginWindow() {
             InitializeComponent();
-            
+            /*
             try {
                 ReadInAllaData();
             } catch {
@@ -35,7 +35,7 @@ namespace PetShop {
                 MessageBox.Show("Database could not be opened to be read.");
             }
             
-
+            */
         }
 
         public LoginWindow(Account acct) {
@@ -45,13 +45,8 @@ namespace PetShop {
                 AccountList = new ObservableCollection<Account>();
             }
             this.AccountList.Add(Account);
-            //PostgreSQL.addAccount(Account);
-            
-            //using (FileStream writeStream = new FileStream(path, FileMode.Create, FileAccess.ReadWrite)) {
-            //    serializer.Serialize(writeStream, AccountList);
-            //}
         }
-        
+        /*
         private void ReadInAllaData()
         {
 
@@ -74,7 +69,7 @@ namespace PetShop {
                 ShoppersList = new ObservableCollection<Account>();
             }
         }
-        
+        */
         private void LogIn(object sender, RoutedEventArgs e) {
             if (CheckUsernamePassword()) {
                 if (AccountToLogin.Type == "Seller") {

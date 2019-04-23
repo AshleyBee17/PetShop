@@ -215,7 +215,7 @@ namespace PetShop {
                             CollectionViewSource.GetDefaultView(lb.ItemsSource).Refresh();
 
                             foreach (Account a in AccountList) {
-                                if (a.id == LoggedInUser.id) { // CHANGE THIS TO ACCOUNT ID
+                                if (a.id == LoggedInUser.id) { 
                                     a.CartContent.Add(selectedAnimal);
                                     a.CartTotal = TotalCost.ToString(); 
                                     a.CartItems = TotalItem.ToString(); 
