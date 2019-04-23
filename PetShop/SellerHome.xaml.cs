@@ -27,7 +27,9 @@ namespace PetShop {
         }
        
         private void LogOut(object sender, RoutedEventArgs e) {
-            Application.Current.Shutdown();
+            LoginWindow lw = new LoginWindow();
+            this.Close();
+            lw.Show();
         }
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };

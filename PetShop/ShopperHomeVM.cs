@@ -252,43 +252,9 @@ namespace PetShop {
             if(SearchText == null){
                 MessageBox.Show("Please enter a search critera");
             } else {
-<<<<<<< HEAD
-                SearchText = SearchText.ToLower();
-                if(SearchType == "Age")
-                {
-                    //ShopperHome sh = new ShopperHome(LoggedInUser);
-                    //closeWindows();
-                    //AnimalCollection = PostgreSQL.searchByAge(SearchText);
-                    //sh.Show();
-                   // PetDisplayVM(1, SearchText);
 
-                } else if (SearchType == "Type")
-                {
-
-                    //ShopperHome sh = new ShopperHome(LoggedInUser);
-                    //closeWindows();
-                    //AnimalCollection = PostgreSQL.searchByType(SearchText);
-                    //sh.Show();
-
-                } else if (SearchType == "Price")
-                {
-                    //ShopperHome sh = new ShopperHome(LoggedInUser);
-                    //closeWindows();
-                    //AnimalCollection = PostgreSQL.searchByPrice(SearchText);
-                    //sh.Show();
-
-                }
-                else if (SearchType == "Zipcode")
-                {
-                    //ShopperHome sh = new ShopperHome(LoggedInUser);
-                    //closeWindows();
-                    //AnimalCollection = PostgreSQL.searchByZip(SearchText);
-                    //sh.Show();
-                }
-=======
                 stype = SearchType;
                 stxt = SearchText;
->>>>>>> f69454fd115a9f575c100ba231bf16b54a3c090c
 
                 ShopperHome sh = new ShopperHome(LoggedInUser);
                 closeWindows();
