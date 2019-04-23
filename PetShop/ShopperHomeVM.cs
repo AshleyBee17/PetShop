@@ -252,64 +252,35 @@ namespace PetShop {
                 SearchText = SearchText.ToLower();
                 if(SearchType == "Age")
                 {
-
-                   
-                    // search for the search text in the db using one of the 
-                    // postgresql.cs functions written
-                    
-                    //arbitrary comments
-                    ShopperHome sh = new ShopperHome(LoggedInUser);
-
-                    // set the results to AnimalCollection or something
-
-                    closeWindows();
-                    AnimalCollection = PostgreSQL.searchByAge(SearchText);
-                    sh.Show();
+                    //ShopperHome sh = new ShopperHome(LoggedInUser);
+                    //closeWindows();
+                    //AnimalCollection = PostgreSQL.searchByAge(SearchText);
+                    //sh.Show();
+                    PetDisplayVM(1, SearchText);
 
                 } else if (SearchType == "Type")
                 {
-                    //hello jelina and ashley
-                   var typeSearch = PostgreSQL.searchByType(SearchText);
-                    // search for the search text in the db using one of the 
-                    // postgresql.cs functions written
 
-
-                    ShopperHome sh = new ShopperHome(LoggedInUser);
-
-                    // set the results to AnimalCollection or something
-
-                    closeWindows();
-                    sh.Show();
+                    //ShopperHome sh = new ShopperHome(LoggedInUser);
+                    //closeWindows();
+                    //AnimalCollection = PostgreSQL.searchByType(SearchText);
+                    //sh.Show();
 
                 } else if (SearchType == "Price")
                 {
-                    var priceSearch = PostgreSQL.searchByPrice(SearchText);
-                    // search for the search text in the db using one of the 
-                    // postgresql.cs functions written
-
-
-                    ShopperHome sh = new ShopperHome(LoggedInUser);
-
-                    // set the results to AnimalCollection or something
-
-                    closeWindows();
-                    sh.Show();
+                    //ShopperHome sh = new ShopperHome(LoggedInUser);
+                    //closeWindows();
+                    //AnimalCollection = PostgreSQL.searchByPrice(SearchText);
+                    //sh.Show();
 
                 }
-               // else if (SearchType == "Zipcode")
-               // {
-                  // var zipcodeSearch = PostgreSQL.searchByZip();
-                    // search for the search text in the db using one of the 
-                    // postgresql.cs functions written
-
-
-                  //  ShopperHome sh = new ShopperHome(LoggedInUser);
-
-                    // set the results to AnimalCollection or something
-
-                  //  closeWindows();
-                   // sh.Show();
-               // }
+                else if (SearchType == "Zipcode")
+                {
+                    //ShopperHome sh = new ShopperHome(LoggedInUser);
+                    //closeWindows();
+                    //AnimalCollection = PostgreSQL.searchByZip(SearchText);
+                    //sh.Show();
+                }
 
             }
         }
