@@ -58,15 +58,6 @@ namespace PetShop {
                     PostgreSQL.addAccount(Account);
                     //PostgreSQL.addSeller(Account, null);
                     openLogin(Account);
-
-                    //ZipCodePanel.Visibility = Visibility.Hidden;
-                    //if (string.IsNullOrWhiteSpace(ZipEntry.Text)) {
-                      //  MessageBox.Show("One more thing! - Please enter your zip code to finish creating your account");
-                   // }
-                   // if (validateZip()) {
-                   //     Account.ZipCode = ZipEntry.Text;
-                   //     openLogin(Account);
-                  //  }
                 }
 
                 

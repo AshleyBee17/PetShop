@@ -142,6 +142,23 @@ namespace PetShop {
             return returnAnimals(dataTable);
         }
 
+        public static ObservableCollection<Animal> searchByID(string petAge)
+        {
+
+            conn = new NpgsqlConnection(cs);
+            conn.Open();
+            sql = "SELECT * FROM pets WHERE \"Age\"=\'" + petAge + "\';";
+            npgCommand = new NpgsqlCommand(sql, conn);
+
+            NpgsqlDataAdapter npgsqlDataAdapter = new NpgsqlDataAdapter(npgCommand);
+            DataTable dataTable = new DataTable();
+
+            npgsqlDataAdapter.Fill(dataTable);
+
+            conn.Close();
+            return returnAnimals(dataTable);
+        }
+
         public static void addPet(Animal a)
         {
             conn = new NpgsqlConnection(cs);
@@ -282,15 +299,17 @@ namespace PetShop {
             npgCommand = new NpgsqlCommand();
             npgCommand.Connection = conn;
 
-            //npgCommand.CommandText = "INSERT INTO public.sellers(\"PetID\", \"Zipcode\") VALUES (@p, @z)";
-            npgCommand.CommandText = "INSERT INTO public.sellers(\"SellerID\", \"PetID\", \"Zipcode\") VALUES ( @s, @p, (SELECT \"PetID\" from pets WHERE \"PetID\"='"+ e.PetID +"') @z)";
+            ObservableCollection<Animal> an = getAllPets();
+            Animal animal = an.Last();
 
+            npgCommand.CommandText = "INSERT INTO public.sellers(\"PetID\", \"SellerID\", \"Zipcode\") VALUES (@p, @s, @z)";
+            //npgCommand.CommandText = "INSERT INTO public.sellers(\"SellerID\", \"PetID\", \"Zipcode\") VALUES ( @s, @p, (SELECT \"PetID\" from pets WHERE \"PetID\"=$"+ 24 +") @z)";
+
+            npgCommand.Parameters.AddWithValue("p", animal.PetID);
             npgCommand.Parameters.AddWithValue("s", a.id);
-           // npgCommand.Parameters.AddWithValue("p", e.PetID);
             npgCommand.Parameters.AddWithValue("z", e.Zipcode);
             npgCommand.ExecuteNonQuery();
-            conn.Close();
-          
+            conn.Close();   
         }
 
         public static void addShopper(Account a, Animal e)
