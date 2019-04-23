@@ -400,9 +400,7 @@ namespace PetShop {
             npgCommand.Connection = conn;
 
             npgCommand.CommandText = "UPDATE public.sellers SET " +
-                "\"SellerID\"=\'" + a.id + "\'," +
-                "\"PetID\"=\'" + e.PetID + "\'" +
-                " WHERE \"SellerID\"=\'" + id + "\';";
+                "\"Zipcode\"=\'" + e.Zipcode + "\' WHERE \"SellerID\"=\'" + id + "\';";
 
             npgCommand.ExecuteNonQuery();
             conn.Close();
