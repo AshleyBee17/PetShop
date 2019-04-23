@@ -22,6 +22,8 @@ namespace PetShop {
         //string animalPath = "animals.xml";
         Account LoggedInUser;
 
+        public static string stype;
+        public static string stxt;
 
         private Account _accountCartTotal;
         public Account AccountCartTotal {
@@ -250,6 +252,7 @@ namespace PetShop {
             if(SearchText == null){
                 MessageBox.Show("Please enter a search critera");
             } else {
+<<<<<<< HEAD
                 SearchText = SearchText.ToLower();
                 if(SearchType == "Age")
                 {
@@ -282,7 +285,14 @@ namespace PetShop {
                     //AnimalCollection = PostgreSQL.searchByZip(SearchText);
                     //sh.Show();
                 }
+=======
+                stype = SearchType;
+                stxt = SearchText;
+>>>>>>> f69454fd115a9f575c100ba231bf16b54a3c090c
 
+                ShopperHome sh = new ShopperHome(LoggedInUser);
+                closeWindows();
+                sh.Show();
             }
         }
 

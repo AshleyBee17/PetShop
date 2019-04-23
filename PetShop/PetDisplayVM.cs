@@ -28,9 +28,20 @@ namespace PetShop {
         
         public PetDisplayVM() {
             if (LoginWindow.AccountToLogin.Type == "Seller") {
-                ReadInDataFromSeller(LoginWindow.AccountToLogin.id); 
-            }  else ReadInAllData();
+                ReadInDataFromSeller(LoginWindow.AccountToLogin.id);
+            } else if (ShopperHomeVM.stype == "Age") {
+                AnimalCollection = PostgreSQL.searchByAge(ShopperHomeVM.stxt);
+            } else if (ShopperHomeVM.stype == "Type") {
+                AnimalCollection = PostgreSQL.searchByType(ShopperHomeVM.stxt);
+            } else if (ShopperHomeVM.stype == "Price") {
+                AnimalCollection = PostgreSQL.searchByPrice(ShopperHomeVM.stxt);
+            } else if (ShopperHomeVM.stype == "Zipcode") {
+                AnimalCollection = PostgreSQL.searchByZip(ShopperHomeVM.stxt);
+            }
+            else ReadInAllData();
         }
+
+      
 
         private void ReadInDataFromSeller(int id) {
 
