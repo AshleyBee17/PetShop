@@ -15,11 +15,6 @@ using System.Xml.Serialization;
 namespace PetShop {
     public class ShopperHomeVM : INotifyPropertyChanged {
 
-        //XmlSerializer AcctSerializer = new XmlSerializer(typeof(ObservableCollection<Account>));
-        //XmlSerializer PetSerializer = new XmlSerializer(typeof(ObservableCollection<Animal>));
-        
-        //string userPath = "userAccounts.xml";
-        //string animalPath = "animals.xml";
         Account LoggedInUser;
 
         public static string stype;
@@ -137,7 +132,7 @@ namespace PetShop {
         public ShopperHomeVM(Account acct) {
             this.LoggedInUser = acct;
             
-            //ReadInDataFromXML();
+   
             SearchType = "Age";
             if(LoggedInUser.CartContent != null) {
                 foreach(object o in LoggedInUser.CartContent) {
@@ -152,7 +147,6 @@ namespace PetShop {
 
         private void AddToCartClicked(object obj) {
 
-            //ObservableCollection<Animal> AnimalCollection;
             ObservableCollection<Account> AccountList;
             AnimalCollection = PostgreSQL.getAllPets();
             AccountList = PostgreSQL.getAllAccounts();
@@ -197,7 +191,6 @@ namespace PetShop {
                             }
                             CollectionViewSource.GetDefaultView(selectedAnimal.Quantity).Refresh();
                             PostgreSQL.addShopper(LoggedInUser, selectedAnimal);
-                            //SaveDataToXML();
                         }
                     } else {
                         foreach(object o in Cart.ToList())
@@ -226,7 +219,6 @@ namespace PetShop {
                             }
                             CollectionViewSource.GetDefaultView(selectedAnimal.Quantity).Refresh();
                             PostgreSQL.addShopper(LoggedInUser, selectedAnimal);
-                            //SaveDataToXML();
                             }
                         }
                     }
@@ -252,43 +244,9 @@ namespace PetShop {
             if(SearchText == null){
                 MessageBox.Show("Please enter a search critera");
             } else {
-<<<<<<< HEAD
-                SearchText = SearchText.ToLower();
-                if(SearchType == "Age")
-                {
-                    //ShopperHome sh = new ShopperHome(LoggedInUser);
-                    //closeWindows();
-                    //AnimalCollection = PostgreSQL.searchByAge(SearchText);
-                    //sh.Show();
-                   // PetDisplayVM(1, SearchText);
 
-                } else if (SearchType == "Type")
-                {
-
-                    //ShopperHome sh = new ShopperHome(LoggedInUser);
-                    //closeWindows();
-                    //AnimalCollection = PostgreSQL.searchByType(SearchText);
-                    //sh.Show();
-
-                } else if (SearchType == "Price")
-                {
-                    //ShopperHome sh = new ShopperHome(LoggedInUser);
-                    //closeWindows();
-                    //AnimalCollection = PostgreSQL.searchByPrice(SearchText);
-                    //sh.Show();
-
-                }
-                else if (SearchType == "Zipcode")
-                {
-                    //ShopperHome sh = new ShopperHome(LoggedInUser);
-                    //closeWindows();
-                    //AnimalCollection = PostgreSQL.searchByZip(SearchText);
-                    //sh.Show();
-                }
-=======
                 stype = SearchType;
                 stxt = SearchText;
->>>>>>> f69454fd115a9f575c100ba231bf16b54a3c090c
 
                 ShopperHome sh = new ShopperHome(LoggedInUser);
                 closeWindows();
