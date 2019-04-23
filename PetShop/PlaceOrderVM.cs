@@ -31,20 +31,23 @@ namespace PetShop {
         public PlaceOrderVM(ShopperHomeVM parent, Account acct) {
             this.Parent = parent;
             this.LoggedInShopper = acct;
-           
+           /*
             try {
                 ReadInDataFromXML();
             } catch {
                 Console.WriteLine("File could not be opened to be read.");
                 MessageBox.Show($"File failed to open because it is empty or does not exist. The file has now been created for you.","File Failed to Open");
             }
+            */
+            AnimalCollection = PostgreSQL.getAllPets();
+            AccountList = PostgreSQL.getAllAccounts();
 
             // Receipt Text
             string header = $"Receipt For {LoggedInShopper.FirstName} {LoggedInShopper.LastName}\n";
             this.ReceiptText = header;
             UpdateQuantities();
         }
-
+        /*
         private void ReadInDataFromXML() {
             using (FileStream readStream = new FileStream(animalPath,  FileMode.Open, FileAccess.Read)) {
                 AnimalCollection = PetSerializer.Deserialize(readStream) as ObservableCollection<Animal>;
@@ -53,12 +56,13 @@ namespace PetShop {
                 AccountList = AcctSerializer.Deserialize(readStream) as ObservableCollection<Account>; 
             }
         }
-
+        */
         private void UpdateQuantities() {           
             foreach (Animal a in Parent.Cart) {
                 foreach (Animal animal in AnimalCollection) {
-                    if (a.Type == animal.Type) {
+                    if (a.PetID == animal.PetID) {
                         animal.Quantity = (int.Parse(animal.Quantity) - int.Parse(a.PurchasedAmount)).ToString();
+                        PostgreSQL.editPet(animal);
                     }
                 }
                 
@@ -77,9 +81,9 @@ namespace PetShop {
                    }
                 }    
             }
-            SaveDataToXML();
+            //SaveDataToXML();
         }
-
+        /*
         private void SaveDataToXML() {
             using (FileStream writeStream = new FileStream(userPath, FileMode.Create, FileAccess.ReadWrite)) {
                 AcctSerializer.Serialize(writeStream, AccountList);
@@ -87,7 +91,7 @@ namespace PetShop {
             using (FileStream writeStream = new FileStream(animalPath, FileMode.Create, FileAccess.ReadWrite)) {
                 PetSerializer.Serialize(writeStream, AnimalCollection);
             }
-        }
+        }*/
 
         private void SaveReceipt(object obj) {
             List<string> receipt = new List<string>();

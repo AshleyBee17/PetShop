@@ -22,6 +22,8 @@ namespace PetShop {
         //string animalPath = "animals.xml";
         Account LoggedInUser;
 
+        public static string stype;
+        public static string stxt;
 
         private Account _accountCartTotal;
         public Account AccountCartTotal {
@@ -250,39 +252,12 @@ namespace PetShop {
             if(SearchText == null){
                 MessageBox.Show("Please enter a search critera");
             } else {
-                SearchText = SearchText.ToLower();
-                if(SearchType == "Age")
-                {
-                    //ShopperHome sh = new ShopperHome(LoggedInUser);
-                    //closeWindows();
-                    //AnimalCollection = PostgreSQL.searchByAge(SearchText);
-                    //sh.Show();
-                    PetDisplayVM(1, SearchText);
+                stype = SearchType;
+                stxt = SearchText;
 
-                } else if (SearchType == "Type")
-                {
-
-                    //ShopperHome sh = new ShopperHome(LoggedInUser);
-                    //closeWindows();
-                    //AnimalCollection = PostgreSQL.searchByType(SearchText);
-                    //sh.Show();
-
-                } else if (SearchType == "Price")
-                {
-                    //ShopperHome sh = new ShopperHome(LoggedInUser);
-                    //closeWindows();
-                    //AnimalCollection = PostgreSQL.searchByPrice(SearchText);
-                    //sh.Show();
-
-                }
-                else if (SearchType == "Zipcode")
-                {
-                    //ShopperHome sh = new ShopperHome(LoggedInUser);
-                    //closeWindows();
-                    //AnimalCollection = PostgreSQL.searchByZip(SearchText);
-                    //sh.Show();
-                }
-
+                ShopperHome sh = new ShopperHome(LoggedInUser);
+                closeWindows();
+                sh.Show();
             }
         }
 
