@@ -304,7 +304,6 @@ namespace PetShop {
             npgCommand.Connection = conn;
 
             npgCommand.CommandText = "INSERT INTO public.sellers(\"PetID\", \"SellerID\", \"Zipcode\") VALUES (@p, @s, @z)";
-            //npgCommand.CommandText = "INSERT INTO public.sellers(\"SellerID\", \"PetID\", \"Zipcode\") VALUES ( @s, @p, (SELECT \"PetID\" from pets WHERE \"PetID\"=$"+ 24 +") @z)";
 
             npgCommand.Parameters.AddWithValue("p", animal.PetID);
             npgCommand.Parameters.AddWithValue("s", a.id);
@@ -321,16 +320,14 @@ namespace PetShop {
             conn = new NpgsqlConnection(cs);
             conn.Open();
 
-            //npgCommand = new NpgsqlCommand();
-            //npgCommand.Connection = conn;
+            npgCommand = new NpgsqlCommand();
+            npgCommand.Connection = conn;
 
-            //ObservableCollection<Account> acctlist = getAllShoppers();
 
-            foreach(Account acct in acctlist){
+            foreach (Account acct in acctlist){
                 if(acct.id == a.id)
                 {
-                    npgCommand = new NpgsqlCommand();
-                    npgCommand.Connection = conn;
+            
 
                     npgCommand.CommandText = "UPDATE public.shoppers" +
                         " SET \"ShopperID\"=" + a.id + ", \"PetID\"=" + e.PetID + ", \"CartItems\"='" + a.CartItems + "', \"CartTotal\"='" + a.CartTotal + "'" +
@@ -340,8 +337,7 @@ namespace PetShop {
                     conn.Close();
                 } else {
 
-                    npgCommand = new NpgsqlCommand();
-                    npgCommand.Connection = conn;
+                
 
                     npgCommand.CommandText = "INSERT INTO public.shoppers(\"ShopperID\", \"PetID\", \"CartItems\", \"CartTotal\") " +
                                     "VALUES (@i, @p, @ci, @ct)";
