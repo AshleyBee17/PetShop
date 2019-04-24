@@ -15,7 +15,6 @@
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
             
-            <MenuItem Header="Help" Click="SaveClick"/>
             <MenuItem Header="Log Out" Click="ExitClick"/>
         
            
@@ -42,14 +41,16 @@
 
             <DockPanel Grid.Row="0" Grid.Column="1"  Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Label DockPanel.Dock="Bottom" Content="Search By"/>
-                <TextBox x:Name="QueryText" Text="{Binding Search}" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" Width="200" Height="25" Margin="5"/>
-                <ComboBox x:Name="PetType" VerticalAlignment="Center" IsReadOnly="True" IsEditable="True" Text="Age" Width="100" Height="25">
+                <TextBox x:Name="QueryText" Text="{Binding SearchText}" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" Width="200" Height="25" Margin="5"/>
+                <ComboBox x:Name="SeachType" VerticalAlignment="Center" IsReadOnly="True" IsEditable="True" Text="{Binding SearchType}" Width="100" Height="25">
+                    <ComboBoxItem Content="All"/>
                     <ComboBoxItem Content="Age"/>
                     <ComboBoxItem Content="Type"/>
                     <ComboBoxItem Content="Price"/>
-                    <ComboBoxItem Content="Location"/>
+                    <ComboBoxItem Content="Zipcode"/>
                 </ComboBox>
-                <Button Name="SearchBy" Content="Search" DockPanel.Dock="Right" VerticalAlignment="Center" Width="100" Height="25" Margin="5"/>
+                <Button Name="SearchBy" Content="Search" DockPanel.Dock="Right" VerticalAlignment="Center" Width="100" Height="25" Margin="5"
+                        Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=PetDisplayItem, Path=Content}"/>
             </DockPanel>
 
             <TextBox x:Name="QuantityText" Text="{Binding Quantity}" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" Width="100" Height="25" Margin="5"/>

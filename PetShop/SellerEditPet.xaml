@@ -29,7 +29,7 @@
                    TextWrapping="Wrap" TextAlignment="Center" Height="45" VerticalAlignment="Center" Grid.ColumnSpan="3" Grid.Column="1" Grid.Row="1"/>
 
         <DockPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <ComboBox x:Name="PetType" DockPanel.Dock="Top" IsReadOnly="True" IsEditable="True" Text="Dog" Width="275">
+            <ComboBox x:Name="PetTypeEntry" DockPanel.Dock="Top" IsReadOnly="True" IsEditable="True" Text="Dog" Width="275">
                 <ComboBoxItem Content="Dog"/>
                 <ComboBoxItem Content="Cat"/>
                 <ComboBoxItem Content="Fish"/>
@@ -40,12 +40,12 @@
         </DockPanel>
 
         <DockPanel Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBox DockPanel.Dock="Top" x:Name="PetAge" Height="30" Width="270" MaxLength="2"/>
+            <TextBox DockPanel.Dock="Top" x:Name="PetAgeEntry" Height="30" Width="270" MaxLength="3"/>
             <Label DockPanel.Dock="Bottom" Content="Age"/>
         </DockPanel>
 
         <DockPanel Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <ComboBox x:Name="PetSize" DockPanel.Dock="Top" IsReadOnly="True" IsEditable="True" Text="Small" Width="275">
+            <ComboBox x:Name="PetSizeEntry" DockPanel.Dock="Top" IsReadOnly="True" IsEditable="True" Text="Small" Width="275">
                 <ComboBoxItem Content="Small"/>
                 <ComboBoxItem Content="Medium"/>
                 <ComboBoxItem Content="Large"/>
@@ -54,17 +54,17 @@
         </DockPanel>
 
         <DockPanel Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBox DockPanel.Dock="Top" x:Name="PetQuantity" Height="30" Width="270"/>
+            <TextBox DockPanel.Dock="Top" x:Name="PetQuantityEntry" Height="30" Width="270" MaxLength="3"/>
             <Label DockPanel.Dock="Bottom" Content="Quantity"/>
         </DockPanel>
 
         <DockPanel Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBox DockPanel.Dock="Top" x:Name="PetPrice" Height="30" Width="268"/>
+            <TextBox DockPanel.Dock="Top" x:Name="PetPriceEntry" Height="30" Width="268" MaxLength="5"/>
             <Label DockPanel.Dock="Bottom" Content="Price"/>
         </DockPanel>
 
         <DockPanel Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBox DockPanel.Dock="Top" x:Name="other" Height="30" Width="268" MaxLength="12"/>
+            <TextBox DockPanel.Dock="Top" x:Name="PetZipEntry" Height="30" Width="268" MaxLength="5"/>
             <Label DockPanel.Dock="Bottom" Content="Location/Zipcode"/>
         </DockPanel>
 

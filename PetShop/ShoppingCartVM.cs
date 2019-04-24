@@ -27,7 +27,8 @@ namespace PetShop {
         public ShoppingCartVM(ShopperHomeVM parent, Account acct) {
             Parent = parent;
             LoggedInUser = acct;
-            ReadInDataFromXML();
+            AccountList = PostgreSQL.getAllAccounts();
+            AnimalCollection = PostgreSQL.getAllPets();
         }
 
         private void UpdateCartClicked(object obj) {
@@ -56,16 +57,16 @@ namespace PetShop {
 
                             foreach(Account acc in AccountList) {
 
-                                if (acc.Username == LoggedInUser.Username) { // CHANGE THIS TO ACCOUNT ID
+                                if (acc.id == LoggedInUser.id) { 
 
-                                    foreach (Animal o in acc.CartContent.ToList()) {
+                                    foreach (Animal o in LoggedInUser.CartContent.ToList()) {
 
-                                        if(o.Size == animal.Size) { // CHANGE THIS TO ANIMAL ID
+                                        if(o.PetID == animal.PetID) { 
                                             // Update cart total and item total in user account
-                                            acc.CartTotal = sumTotal.ToString();
-                                            acc.CartItems = sumItem.ToString();
+                                            LoggedInUser.CartTotal = sumTotal.ToString();
+                                            LoggedInUser.CartItems = sumItem.ToString();
 
-                                            foreach(Animal ani in acc.CartContent) {
+                                            foreach(Animal ani in LoggedInUser.CartContent) {
 
                                                 if(ani.Type == a.Type) {
                                                     // Update amount purchased in user account
@@ -90,9 +91,9 @@ namespace PetShop {
                             a.Quantity = animal.Quantity;
                         }
                         foreach(Account acc in AccountList) {
-                            if (acc.Username == LoggedInUser.Username) { // CHANGE THIS TO ACOUNT ID
-                                foreach (Animal o in acc.CartContent.ToList()) {
-                                    if(o.Size == an.Size) { // CHANGE THIS TO ANIMAL ID
+                            if (acc.id == LoggedInUser.id) { 
+                                foreach (Animal o in LoggedInUser.CartContent.ToList()) {
+                                    if(o.PetID == an.PetID) { 
                                         acc.CartContent.Remove(o);
                                         acc.CartTotal = sumTotal.ToString();
                                         acc.CartItems = sumItem.ToString();
@@ -103,7 +104,7 @@ namespace PetShop {
                     }
                 }
                 // Save all updated data to the XML file and refresh the displayed items in the cart and list box
-                SaveDataToXML();
+                //SaveDataToXML(); // DELETE THIS 
                 CollectionViewSource.GetDefaultView(Parent.Cart).Refresh();
                 CollectionViewSource.GetDefaultView(Parent.lb.ItemsSource).Refresh();
             }
@@ -137,12 +138,12 @@ namespace PetShop {
 
                 // Remove the item from the user's account
                 foreach(Account a in AccountList) {
-                    if (a.Username == LoggedInUser.Username) { // CHANGE THIS TO ACCOUNT ID
-                        foreach (Animal o in a.CartContent.ToList()) {
-                            if(o.Size == selectedAnimal.Size) { // CHANGE THIS TO ANIMAL ID
-                                a.CartContent.Remove(o);
-                                a.CartTotal = (int.Parse(a.CartTotal) - (int.Parse(selectedAnimal.PurchasedAmount) * int.Parse(selectedAnimal.Price))).ToString();
-                                a.CartItems = (int.Parse(a.CartItems) - int.Parse(selectedAnimal.PurchasedAmount)).ToString();
+                    if (a.id == LoggedInUser.id) { 
+                        foreach (Animal o in LoggedInUser.CartContent.ToList()) {
+                            if(o.PetID == selectedAnimal.PetID) { 
+                                LoggedInUser.CartContent.Remove(o);
+                                LoggedInUser.CartTotal = (int.Parse(LoggedInUser.CartTotal) - (int.Parse(selectedAnimal.PurchasedAmount) * int.Parse(selectedAnimal.Price))).ToString();
+                                LoggedInUser.CartItems = (int.Parse(LoggedInUser.CartItems) - int.Parse(selectedAnimal.PurchasedAmount)).ToString();
                             }
                         }                        
                     }
@@ -152,11 +153,12 @@ namespace PetShop {
                 CollectionViewSource.GetDefaultView(Parent.Cart).Refresh();
                 CollectionViewSource.GetDefaultView(Parent.lb.ItemsSource).Refresh();
             } catch (Exception e) {
-                MessageBox.Show("Error, please reload the program.");
+                MessageBox.Show("Error, please reload the program. " + e);
             }
-            SaveDataToXML();
+            //SaveDataToXML(); // DELETE THIS 
         }
 
+        // DELETE THESE TWO METHODS
         private void SaveDataToXML() {
             using (FileStream writeStream = new FileStream(userPath, FileMode.Create, FileAccess.ReadWrite)) {
                 AcctSerializer.Serialize(writeStream, AccountList);

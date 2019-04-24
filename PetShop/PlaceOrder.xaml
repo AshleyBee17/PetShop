@@ -50,7 +50,7 @@
             <Label Content="{Binding Parent.TotalCostDisplay}" Height="25" Width="100"/>
         </StackPanel>
         <StackPanel>
-            <Button Content="Save Receipt" Height="25" Width="200" Command="{Binding SaveReceiptCommand}" Margin="5"/>
+            <Button  Visibility="Hidden" Content="Save Receipt" Height="25" Width="200" Command="{Binding SaveReceiptCommand}" Margin="5"/>
         </StackPanel>
         
     </StackPanel>

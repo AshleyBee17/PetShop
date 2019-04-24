@@ -15,13 +15,10 @@ using System.Xml.Serialization;
 namespace PetShop {
     public class ShopperHomeVM : INotifyPropertyChanged {
 
-        XmlSerializer AcctSerializer = new XmlSerializer(typeof(ObservableCollection<Account>));
-        XmlSerializer PetSerializer = new XmlSerializer(typeof(ObservableCollection<Animal>));
-        ObservableCollection<Animal> AnimalCollection;
-        ObservableCollection<Account> AccountList;
-        string userPath = "userAccounts.xml";
-        string animalPath = "animals.xml";
         Account LoggedInUser;
+
+        public static string stype;
+        public static string stxt;
 
         private Account _accountCartTotal;
         public Account AccountCartTotal {
@@ -77,6 +74,28 @@ namespace PetShop {
             }
         }
 
+        private  string _searchText;
+        public string SearchText
+        {
+            get { return _searchText; }
+            set
+            {
+                _searchText = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("SearchText"));
+            }
+        }
+
+        private  string _searchType;
+        public  string SearchType
+        {
+            get { return _searchType; }
+            set
+            {
+                _searchType = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("SearchType"));
+            }
+        }
+
         private double _totalCost = 0;
         public double TotalCost {
             get { return _totalCost; }
@@ -112,7 +131,9 @@ namespace PetShop {
 
         public ShopperHomeVM(Account acct) {
             this.LoggedInUser = acct;
-            ReadInDataFromXML();
+            
+   
+            SearchType = "Age";
             if(LoggedInUser.CartContent != null) {
                 foreach(object o in LoggedInUser.CartContent) {
                     Animal an = o as Animal;
@@ -122,8 +143,13 @@ namespace PetShop {
                 }
             }
         }
+        ObservableCollection<Animal> AnimalCollection;
 
         private void AddToCartClicked(object obj) {
+
+            ObservableCollection<Account> AccountList;
+            AnimalCollection = PostgreSQL.getAllPets();
+            AccountList = PostgreSQL.getAllAccounts();
 
             lb = obj as ListBox;
             Animal selectedAnimal = lb.SelectedItem as Animal;
@@ -153,14 +179,18 @@ namespace PetShop {
                             CollectionViewSource.GetDefaultView(lb.ItemsSource).Refresh();
 
                             foreach (Account a in AccountList) {
-                                if (a.Username == LoggedInUser.Username) { // CHANGE THIS TO ACCOUNT ID
-                                    a.CartContent.Add(selectedAnimal);
-                                    a.CartTotal = TotalCost.ToString(); 
-                                    a.CartItems = TotalItem.ToString(); 
+                                if (a.id == LoggedInUser.id) { // CHANGE THIS TO ACCOUNT ID
+                                    if (LoggedInUser.CartContent == null)
+                                    {
+                                        LoggedInUser.CartContent = new ObservableCollection<Animal>();
+                                    }
+                                    LoggedInUser.CartContent.Add(selectedAnimal);
+                                    LoggedInUser.CartTotal = TotalCost.ToString();
+                                    LoggedInUser.CartItems = TotalItem.ToString(); 
                                 }
                             }
                             CollectionViewSource.GetDefaultView(selectedAnimal.Quantity).Refresh();
-                            SaveDataToXML();
+                            PostgreSQL.addShopper(LoggedInUser, selectedAnimal);
                         }
                     } else {
                         foreach(object o in Cart.ToList())
@@ -180,36 +210,19 @@ namespace PetShop {
                             CollectionViewSource.GetDefaultView(lb.ItemsSource).Refresh();
 
                             foreach (Account a in AccountList) {
-                                if (a.Username == LoggedInUser.Username) { // CHANGE THIS TO ACCOUNT ID
-                                    a.CartContent.Add(selectedAnimal);
-                                    a.CartTotal = TotalCost.ToString(); 
-                                    a.CartItems = TotalItem.ToString(); 
+                                if (a.id == LoggedInUser.id) { 
+                                      
+                                    LoggedInUser.CartContent.Add(selectedAnimal);
+                                    LoggedInUser.CartTotal = TotalCost.ToString(); 
+                                    LoggedInUser.CartItems = TotalItem.ToString(); 
                                 }
                             }
                             CollectionViewSource.GetDefaultView(selectedAnimal.Quantity).Refresh();
-                            SaveDataToXML();
+                            PostgreSQL.addShopper(LoggedInUser, selectedAnimal);
                             }
                         }
                     }
                 }
-            }
-        }
-
-        private void SaveDataToXML() {
-            using (FileStream writeStream = new FileStream(userPath, FileMode.Create, FileAccess.ReadWrite)) {
-                AcctSerializer.Serialize(writeStream, AccountList);
-            }
-            using (FileStream writeStream = new FileStream(animalPath, FileMode.Create, FileAccess.ReadWrite)) {
-                PetSerializer.Serialize(writeStream, AnimalCollection);
-            }
-        }
-
-        private void ReadInDataFromXML() {
-            using (FileStream readStream = new FileStream(animalPath,  FileMode.Open, FileAccess.Read)) {
-                AnimalCollection = PetSerializer.Deserialize(readStream) as ObservableCollection<Animal>;
-            }
-            using (FileStream readStream = new FileStream(userPath, FileMode.Open, FileAccess.Read)) {
-                AccountList = AcctSerializer.Deserialize(readStream) as ObservableCollection<Account>; 
             }
         }
 
@@ -225,6 +238,26 @@ namespace PetShop {
             PlaceOrder po = new PlaceOrder();
             po.DataContext = poVM;
             po.Show();
+        }
+
+        private void SearchPets(object o) {
+            if(SearchText == null && SearchType != "All"){
+                MessageBox.Show("Please enter a search critera");
+            } else {
+
+                stype = SearchType;
+                stxt = SearchText;
+
+                ShopperHome sh = new ShopperHome(LoggedInUser);
+                closeWindows();
+                sh.Show();
+            }
+        }
+
+        private void closeWindows() {
+            foreach (Window item in Application.Current.Windows) {
+                if (item.DataContext == this) item.Close();
+            }
         }
 
         public ICommand OpenCartCommand {
@@ -251,6 +284,16 @@ namespace PetShop {
             }
         }
         DelegateCommand _placeOrderEvent;
+
+        public ICommand SearchCommand
+        {
+            get
+            {
+                if (_searchEvent == null) _searchEvent = new DelegateCommand(SearchPets);
+                return _searchEvent;
+            }
+        }
+        DelegateCommand _searchEvent;
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
     }

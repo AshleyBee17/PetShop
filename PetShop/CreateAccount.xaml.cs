@@ -16,19 +16,16 @@ using System.Windows.Shapes;
 namespace PetShop { 
     public partial class CreateAccount : Window {
 
-        //ObservableCollection<Account> AccountList;
         
         public CreateAccount(){
             InitializeComponent();
         }
-        /*
-        public CreateAccount() {
-            this.AccountList = acctList;
-            InitializeComponent();
-        }*/
-
+ 
         private void Submit(object sender, RoutedEventArgs e) {
-            if (ValidateEntries()) {
+
+            ObservableCollection<Account> acct = PostgreSQL.searchByUsername(UsernameEntry.Text);
+            if(acct.Count != 0) MessageBox.Show("Username already exists. Please choose another username!");
+            if (ValidateEntries() && acct.Count ==0) {
 
                 Account Account = new Account();
 
@@ -37,29 +34,22 @@ namespace PetShop {
                 Account.Telephone = PhoneEntry.Text;
                 Account.Username = UsernameEntry.Text;
                 Account.Password = PasswordEntry.Password;
-                //Account.ZipCode = ZipEntry.Text;
                 Account.CartItems = "0";
                 Account.CartTotal = "0";
                 Account.CartContent = new ObservableCollection<Animal>();
                 Account.PreviousPurchases = new ObservableCollection<Animal>();
+                
 
                 if (Shopper.IsChecked == true) {
                     Account.Type = Shopper.Content.ToString();
+                    PostgreSQL.addAccount(Account);
                     ZipCodePanel.Visibility = Visibility.Hidden;
                     openLogin(Account);
                 } else if (Seller.IsChecked == true) {
                     Account.Type = Seller.Content.ToString();
-                    ZipCodePanel.Visibility = Visibility.Visible;
-                    if (string.IsNullOrWhiteSpace(ZipEntry.Text)) {
-                        MessageBox.Show("Please enter your zip code to finish creating your account");
-                    }
-                    if (validateZip()) {
-                        Account.ZipCode = ZipEntry.Text;
-                        openLogin(Account);
-                    }
-                }
-
-                
+                    PostgreSQL.addAccount(Account);
+                    openLogin(Account);
+                }             
             }
         }
 
@@ -79,7 +69,7 @@ namespace PetShop {
         }
 
         bool ValidateEntries () {
-            bool validateFirstName, validateLastName, validateUsername, validatePassword, validateZip, validatePhone, validateCard;
+            bool validateFirstName, validateLastName, validateUsername, validatePassword, validatePhone;
             bool validateAcctType;
 
             validateFirstName = string.IsNullOrWhiteSpace(FirstNameEntry.Text) ? false : ValidateLetters(FirstNameEntry.Text);
@@ -93,9 +83,6 @@ namespace PetShop {
 
             validatePassword = string.IsNullOrWhiteSpace(PasswordEntry.Password) ? false : ValidateNoSpace(PasswordEntry.Password);
             PasswordEntry.BorderBrush = validatePassword ? PasswordEntry.BorderBrush = Brushes.Gray : PasswordEntry.BorderBrush = Brushes.Red;
-
-           // validateZip = string.IsNullOrWhiteSpace(ZipEntry.Text) ? false : ValidateNum(ZipEntry.Text);
-           // ZipEntry.BorderBrush = validateZip ? ZipEntry.BorderBrush = Brushes.Gray : ZipEntry.BorderBrush = Brushes.Red;
 
             validatePhone = string.IsNullOrWhiteSpace(PhoneEntry.Text) ? false : ValidateEmailPhone(PhoneEntry.Text);
             PhoneEntry.BorderBrush = validatePhone ? PhoneEntry.BorderBrush = Brushes.Gray : PhoneEntry.BorderBrush = Brushes.Red;
