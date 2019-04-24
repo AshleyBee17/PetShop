@@ -18,7 +18,7 @@ These instructions will get you a copy of the project up and running on your loc
 A step by step series of examples that tell you how to get a development environment running
 
 #### Step 1: Installing Visual Studio
-Install Visual Studio like you would for any other IDE and with your preferred settings at https://visualstudio.microsoft.com
+Install Visual Studio like you would for any other IDE and with your preferred settings [here](https://visualstudio.microsoft.com)
 
 #### Step 2: Installing Pgadmin 4
 Download and install the latest version Pgadmin from [here](https://www.pgadmin.org)
@@ -44,13 +44,13 @@ Right click Servers on the left side of the screen and then click new Server
 
 ```
 Name: Anything you'd like
-Make the Host name / Address: localhost
+Host name / Address: localhost
 Port: 5432
 Username: postgres
 Maintenance DB: postgres
 Password: The same password used to install Pgadmin and Stack Builder
 ```
-then create the new server
+Then create the new server
 
 Under public create 4 new tables: pets, users, shoppers, and sellers. Use the CreateTable.txt file to follow the schema for each of the relations
 
@@ -77,6 +77,14 @@ commit;
 the sequence name needs to be different for each sequence in the tables.
 Once this step is complete you're all set.
 
+## Running the Application
+
 Run the application from Visual Studio using the green play button labled Start at the top of the IDE. Create an account as 
 a Seller and add some pets to the database! If you immediately create an account as a Shopper there will be no pets in the database 
-to view.
+to view and add to your cart.
+
+## Authors
+* Ashley Benjamin-Shallow
+* Jelina Ramos Perez
+* Rahul Kant
+
